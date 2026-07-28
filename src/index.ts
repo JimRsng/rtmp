@@ -1,6 +1,6 @@
 import { createInterface } from "node:readline";
 import { defineCommand, runMain } from "citty";
-import { runServer } from "./server";
+import { runServer } from "./server.ts";
 
 const promptToken = async (): Promise<string> => {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
