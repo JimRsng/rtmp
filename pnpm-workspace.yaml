@@ -1,6 +1,5 @@
 minimumReleaseAge: 0
-shamefullyHoist: true
-strictPeerDependencies: false
+
 allowBuilds:
   cloudflared: false
   esbuild: false
