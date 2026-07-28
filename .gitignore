@@ -10,3 +10,4 @@ scripts/*.js
 /*.sql
 .wrangler
 .data
+pkg
