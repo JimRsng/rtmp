@@ -1,4 +1,4 @@
-import { mkdirSync } from "node:fs";
+import { mkdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
@@ -8,7 +8,7 @@ import { install } from "cloudflared";
 export const runServer = async (token: string): Promise<void> => {
   const runtimeDir = join(process.env.LOCALAPPDATA || tmpdir(), "jim-rtmp");
   console.info(runtimeDir);
-  mkdirSync(runtimeDir, { recursive: true });
+  await mkdir(runtimeDir, { recursive: true });
   const cloudflaredBin = join(runtimeDir, process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
   await install(cloudflaredBin);
   spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
