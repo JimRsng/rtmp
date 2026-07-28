@@ -1,0 +1,27 @@
+{
+	"type": "module",
+	"name": "rtmp",
+	"scripts": {
+		"start": "node src/index.ts",
+		"lint": "eslint .",
+		"build": "unbuild",
+		"compile": "unbuild && pkg dist/index.mjs --targets node24-win-x64 --output pkg/jim-rtmp.exe"
+	},
+	"bin": "dist/index.mjs",
+	"devDependencies": {
+		"@stylistic/eslint-plugin": "^5.10.0",
+		"@types/node": "^26.1.2",
+		"@types/node-media-server": "^2.3.7",
+		"@typescript-eslint/eslint-plugin": "^8.65.0",
+		"@typescript-eslint/parser": "^8.65.0",
+		"@yao-pkg/pkg": "^6.21.0",
+		"citty": "^0.2.2",
+		"cloudflared": "^0.7.1",
+		"eslint": "^10.8.0",
+		"eslint-plugin-import-x": "^4.17.1",
+		"node-media-server": "^4.2.8",
+		"typescript": "^6.0.3",
+		"unbuild": "^3.6.1"
+	},
+	"packageManager": "pnpm@11.17.0"
+}
