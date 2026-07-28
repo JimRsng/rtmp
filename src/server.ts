@@ -13,6 +13,8 @@ export const runServer = async (token: string): Promise<void> => {
   await install(cloudflaredBin);
   spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
   const nms = new NodeMediaServer({
+    // @ts-expect-error No bind type
+    bind: "127.0.0.1",
     rtmp: {
       port: 5740,
       chunk_size: 60000,
