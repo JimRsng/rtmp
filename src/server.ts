@@ -1,15 +1,15 @@
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
+import { mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { spawn } from "node:child_process";
 import NodeMediaServer from "node-media-server";
 import { install } from "cloudflared";
 
 export const runServer = async (token: string): Promise<void> => {
-  const runtimeDir = path.join(process.env.LOCALAPPDATA || os.tmpdir(), "jim-rtmp");
+  const runtimeDir = join(process.env.LOCALAPPDATA || tmpdir(), "jim-rtmp");
   console.info(runtimeDir);
-  fs.mkdirSync(runtimeDir, { recursive: true });
-  const cloudflaredBin = path.join(runtimeDir, process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
+  mkdirSync(runtimeDir, { recursive: true });
+  const cloudflaredBin = join(runtimeDir, process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
   await install(cloudflaredBin);
   spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
   const nms = new NodeMediaServer({
