@@ -1,6 +1,33 @@
 {
-	"type": "module",
-	"name": "rtmp",
+  "private": true,
+  "name": "rtmp",
+  "version": "1.0.0",
+  "description": "A RTMP project for JimRsng's streaming space.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Ahmed Rangel",
+    "email": "ahmedrangel@outlook.com",
+    "url": "https://ahmedrangel.com"
+  },
+  "contributors": [
+    {
+      "name": "Ahmed Rangel",
+      "email": "ahmedrangel@outlook.com",
+      "url": "https://ahmedrangel.com"
+    },
+    {
+      "name": "Yizack Rangel",
+      "email": "yizackr@gmail.com",
+      "url": "https://yizack.com"
+    }
+  ],
+  "homepage": "https://github.com/JimRsng/rtmp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JimRsng/rtmp.git"
+  },
+  "bugs": "https://github.com/JimRsng/rtmp/issues",
 	"scripts": {
 		"start": "node src/index.ts",
 		"lint": "oxlint",
