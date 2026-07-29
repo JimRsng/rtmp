@@ -1,6 +1,6 @@
 # rtmp
 
-A RTMP project for JimRsng's streaming space.
+An RTMP project for JimRsng's streaming space.
 
 ## Prerequisites
 
