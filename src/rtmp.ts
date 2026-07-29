@@ -40,8 +40,8 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
       "-i", `rtmp://${streamHost}:${options.port}${streamPath}`,
 
       // 3 calidades: 1080p, 720p, 480p
-    "-filter_complex",
-    "[0:v]split=3[v1080][v720][v480];" +
+      "-filter_complex",
+      "[0:v]split=3[v1080][v720][v480];" +
       "[v1080]scale=1920:1080:force_original_aspect_ratio=decrease:force_divisible_by=2," +
       "pad=1920:1080:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v1080out];" +
       "[v720]scale=1280:720:force_original_aspect_ratio=decrease:force_divisible_by=2," +
@@ -50,8 +50,8 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
       "pad=854:480:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v480out]",
 
       "-map", "[v1080out]", "-map", "0:a:0",
-      "-map", "[v720out]",  "-map", "0:a:0",
-      "-map", "[v480out]",  "-map", "0:a:0",
+      "-map", "[v720out]", "-map", "0:a:0",
+      "-map", "[v480out]", "-map", "0:a:0",
 
       "-c:v", "libx264",
       "-preset", "faster",
