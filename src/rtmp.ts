@@ -74,7 +74,7 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
       "-hls_list_size", "1",
       "-hls_flags", "delete_segments+append_list+independent_segments",
 
-      "-hls_segment_filename", join(mediaDir, "%v_%03d.ts"),
+      "-hls_segment_filename", join(mediaDir, "%v_%01d.ts"),
       "-master_pl_name", "master.m3u8",
       "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p",
       join(mediaDir, "%v.m3u8")
