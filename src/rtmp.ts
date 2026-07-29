@@ -5,7 +5,7 @@ import { install } from "cloudflared";
 import { getDirs, startDirs } from "./utils/helpers.ts";
 import { installFFmpeg } from "./utils/ffmpeg-install.ts";
 
-export const runRtmp = async (token: string): Promise<void> => {
+export const runRtmp = async (token: string, options: { port: number }): Promise<void> => {
   await startDirs();
   const { runtimeDir, mediaDir } = await getDirs();
   const cloudflaredBin = join(runtimeDir, process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
@@ -17,7 +17,7 @@ export const runRtmp = async (token: string): Promise<void> => {
     // @ts-expect-error No bind type
     bind: "127.0.0.1",
     rtmp: {
-      port: 5740,
+      port: options.port,
       chunk_size: 60000,
       gop_cache: true,
       ping: 30,
@@ -31,7 +31,7 @@ export const runRtmp = async (token: string): Promise<void> => {
   nms.on("prePublish", (session: { streamHost: string, streamPath: string }) => {
     const { streamHost, streamPath } = session;
     const ff = spawn(ffmpegBin, [
-      "-i", `rtmp://${streamHost}:5740${streamPath}`,
+      "-i", `rtmp://${streamHost}:${options.port}${streamPath}`,
       "-c:v", "libx264",
       "-preset", "ultrafast",
       "-crf", "28",

@@ -30,8 +30,8 @@ const main = defineCommand({
     try {
       const token = args.token || await promptToken();
       if (token) {
-        runHttp();
-        await runRtmp(token);
+        runHttp({ port: 8080 });
+        await runRtmp(token, { port: 5740 });
       }
     }
     catch (err) {

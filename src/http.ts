@@ -41,8 +41,8 @@ router.get("/live/:segment", async (req) => {
   });
 });
 
-export const runHttp = () => {
+export const runHttp = (options: { port: number }) => {
   const ittyServer = createServerAdapter(router.fetch);
   const httpServer = createServer(ittyServer);
-  httpServer.listen(8080);
+  httpServer.listen(options.port);
 };
