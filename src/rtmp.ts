@@ -73,16 +73,13 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
       "-hls_time", "1",
       "-hls_list_size", "10",
       "-hls_flags", "delete_segments+append_list+independent_segments",
+      "-hls_start_number_source", "epoch",
 
       "-hls_segment_filename", join(mediaDir, "stream_%v_%03d.ts"),
       "-master_pl_name", "master.m3u8",
       "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p",
       join(mediaDir, "index_%v.m3u8")
     ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
-
-    ff.stderr?.on("data", (data) => {
-      console.info(`[FFmpeg] ${data.toString()}`);
-    });
 
     ff.stdout?.on("data", (data) => {
       console.info(`[FFmpeg stdout] ${data.toString()}`);
