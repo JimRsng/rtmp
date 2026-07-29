@@ -33,7 +33,7 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "build": "obuild",
-    "compile": "obuild && pkg dist/index.mjs -t node24-win-x64 -o pkg/jim-rtmp.exe --sea",
+    "compile": "obuild && pkg dist/index.mjs -t node24-win-x64 -o pkg/jim-rtmp.exe",
     "test:types": "tsc --noEmit",
     "checks": "node --run lint && node --run test:types && node --run build",
     "release": "node --run checks && changelogen --release --no-github && git push --follow-tags"
