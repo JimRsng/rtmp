@@ -3,4 +3,5 @@ minimumReleaseAge: 0
 allowBuilds:
   cloudflared: false
   esbuild: false
+  ffmpeg-static: false
   unrs-resolver: false

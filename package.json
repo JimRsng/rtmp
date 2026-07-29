@@ -28,25 +28,35 @@
     "url": "git+https://github.com/JimRsng/rtmp.git"
   },
   "bugs": "https://github.com/JimRsng/rtmp/issues",
-	"scripts": {
-		"start": "node src/index.ts",
-		"lint": "oxlint",
-		"lint:fix": "oxlint --fix",
-		"build": "obuild",
-		"compile": "obuild && pkg dist/index.mjs --targets node24-win-x64 --output pkg/jim-rtmp.exe"
-	},
-	"bin": "dist/index.mjs",
-	"devDependencies": {
-		"@stylistic/eslint-plugin": "^5.10.0",
-		"@types/node": "^26.1.2",
-		"@types/node-media-server": "^2.3.7",
-		"@yao-pkg/pkg": "^6.21.0",
-		"citty": "^0.2.2",
-		"cloudflared": "^0.7.1",
-		"node-media-server": "^4.2.8",
-		"obuild": "^0.4.38",
-		"oxlint": "^1.76.0",
-		"typescript": "^7.0.2"
-	},
-	"packageManager": "pnpm@11.17.0"
+  "scripts": {
+    "start": "node src/index.ts",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "build": "obuild",
+    "postbuild": "node src/scripts/postbuild.ts",
+    "compile": "obuild && pkg dist/index.mjs --config package.json --output pkg/jim-rtmp.exe"
+  },
+  "bin": "dist/index.mjs",
+  "pkg": {
+    "targets": [
+      "node24-win-x64"
+    ],
+    "outputPath": "pkg/jim-rtmp.exe"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/node": "^26.1.2",
+    "@types/node-media-server": "^2.3.7",
+    "@whatwg-node/server": "^0.11.0",
+    "@yao-pkg/pkg": "^6.21.0",
+    "citty": "^0.2.2",
+    "cloudflared": "^0.7.1",
+    "itty-router": "^5.0.24",
+    "node-media-server": "^4.2.8",
+    "obuild": "^0.4.38",
+    "ofetch": "^1.5.1",
+    "oxlint": "^1.76.0",
+    "typescript": "^7.0.2"
+  },
+  "packageManager": "pnpm@11.17.0"
 }

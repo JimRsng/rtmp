@@ -1,6 +1,7 @@
 import { createInterface } from "node:readline";
 import { defineCommand, runMain } from "citty";
-import { runServer } from "./server.ts";
+import { runRtmp } from "./rtmp.ts";
+import { runHttp } from "./http.ts";
 
 const promptToken = async (): Promise<string> => {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -27,7 +28,8 @@ const main = defineCommand({
     try {
       const token = args.token || await promptToken();
       if (token) {
-        await runServer(token);
+        runHttp();
+        await runRtmp(token);
       }
     }
     catch (err) {
