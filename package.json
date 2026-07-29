@@ -36,7 +36,8 @@
     "compile": "obuild && pkg dist/index.mjs -t node24-win-x64 -o pkg/jim-rtmp.exe",
     "test:types": "tsc --noEmit",
     "checks": "node --run lint && node --run test:types && node --run build",
-    "release": "node --run checks && changelogen --release --no-github && git push --follow-tags"
+    "release": "node --run checks && changelogen --release --no-github && git push --follow-tags",
+    "release:github": "changelogen gh release"
   },
   "bin": "dist/index.mjs",
   "devDependencies": {
