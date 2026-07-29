@@ -37,16 +37,31 @@ export const runRtmp = async (token: string): Promise<void> => {
       "-crf", "28",
       "-c:a", "aac",
       "-b:a", "128k",
+      "-fflags", "nobuffer",
+      "-flags", "low_delay",
+      "-tune", "zerolatency",
       "-f", "hls",
-      "-hls_time", "2",
-      "-hls_list_size", "6",
+      "-hls_time", "1",
+      "-hls_list_size", "10",
       "-hls_flags", "delete_segments+append_list",
       "-hls_segment_filename", join(mediaDir, "%03d.ts"),
       join(mediaDir, "index.m3u8")
     ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
-    ff.on("close", (code) => {
-      console.warn(`FFmpeg terminó con código ${code}`);
+    ff.stderr?.on("data", (data) => {
+      console.info(`[FFmpeg] ${data.toString()}`);
+    });
+
+    ff.stdout?.on("data", (data) => {
+      console.info(`[FFmpeg stdout] ${data.toString()}`);
+    });
+
+    ff.on("close", (code, signal) => {
+      console.warn(`FFmpeg terminó con código ${code}, señal: ${signal}`);
+    });
+
+    ff.on("error", (err) => {
+      console.error(`FFmpeg error: ${err.message}`);
     });
   });
 
