@@ -1,6 +1,41 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- Make http and rtmp ports in-method configurable ([fa7edfb](https://github.com/JimRsng/rtmp/commit/fa7edfb))
+
+### 🩹 Fixes
+
+- Close interface on empty prompt ([248bd32](https://github.com/JimRsng/rtmp/commit/248bd32))
+
+### 💅 Refactors
+
+- **rtmp:** Unify dir setup and platform handling ([dac58ba](https://github.com/JimRsng/rtmp/commit/dac58ba))
+
+### 📦 Build
+
+- **compile:** Simplify pkg script ([27fcfca](https://github.com/JimRsng/rtmp/commit/27fcfca))
+- **compile:** Pkg on sea mode ([2f5cbd8](https://github.com/JimRsng/rtmp/commit/2f5cbd8))
+
+### 🏡 Chore
+
+- Early return main run ([03b6a61](https://github.com/JimRsng/rtmp/commit/03b6a61))
+
+### 🤖 CI
+
+- **release:** Publish as draft to enable release immutability ([4a38127](https://github.com/JimRsng/rtmp/commit/4a38127))
+- Add GitHub workflows and checks ([974ff75](https://github.com/JimRsng/rtmp/commit/974ff75))
+- **release:** Fail on unmatched files ([577a7e2](https://github.com/JimRsng/rtmp/commit/577a7e2))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.0.3
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.2...v0.0.3)
