@@ -97,5 +97,5 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
     });
   });
 
-  // spawn(cloudflaredBin, ["tunnel", "run", "--token", token], { stdio: "inherit", shell: false });
+  spawn(cloudflaredBin, ["tunnel", "run", "--token", token], { stdio: "inherit", shell: false });
 };
