@@ -2,7 +2,7 @@ import { createInterface } from "node:readline";
 import { defineCommand, runMain } from "citty";
 import { runRtmp } from "./rtmp.ts";
 import { runHttp } from "./http.ts";
-import pkg from "../package.json";
+import pkg from "../package.json" with { type: "json" };
 
 const promptToken = async (): Promise<string> => {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -26,6 +26,7 @@ const main = defineCommand({
     }
   },
   async run ({ args }) {
+    console.info(`Starting ${pkg.name} v${pkg.version}...`);
     try {
       const token = args.token || await promptToken();
       if (token) {
