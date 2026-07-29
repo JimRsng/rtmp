@@ -14,7 +14,7 @@ const router = AutoRouter({
 
 router.get("/live/jimrsng.m3u8", async () => {
   const { mediaDir } = await getDirs();
-  const filePath = join(mediaDir, "index.m3u8");
+  const filePath = join(mediaDir, "master.m3u8");
   const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
     return new Response("File not found", { status: 404 });

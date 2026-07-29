@@ -38,20 +38,46 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
     const { streamHost, streamPath } = session;
     const ff = spawn(ffmpegBin, [
       "-i", `rtmp://${streamHost}:${options.port}${streamPath}`,
+
+      // 3 calidades: 1080p, 720p, 480p
+    "-filter_complex",
+    "[0:v]split=3[v1080][v720][v480];" +
+      "[v1080]scale=1920:1080:force_original_aspect_ratio=decrease:force_divisible_by=2," +
+      "pad=1920:1080:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v1080out];" +
+      "[v720]scale=1280:720:force_original_aspect_ratio=decrease:force_divisible_by=2," +
+      "pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v720out];" +
+      "[v480]scale=854:480:force_original_aspect_ratio=decrease:force_divisible_by=2," +
+      "pad=854:480:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v480out]",
+
+      "-map", "[v1080out]", "-map", "0:a:0",
+      "-map", "[v720out]",  "-map", "0:a:0",
+      "-map", "[v480out]",  "-map", "0:a:0",
+
       "-c:v", "libx264",
-      "-preset", "ultrafast",
-      "-crf", "28",
+      "-preset", "faster",
+      "-tune", "zerolatency",
+
+      "-b:v:0", "4500k", "-maxrate:v:0", "8000k", "-bufsize:v:0", "14000k",
+      "-b:v:1", "2500k", "-maxrate:v:1", "3500k", "-bufsize:v:1", "6000k",
+      "-b:v:2", "1200k", "-maxrate:v:2", "1800k", "-bufsize:v:2", "2800k",
+
       "-c:a", "aac",
-      "-b:a", "128k",
+      "-b:a:0", "192k",
+      "-b:a:1", "128k",
+      "-b:a:2", "96k",
+
       "-fflags", "nobuffer",
       "-flags", "low_delay",
-      "-tune", "zerolatency",
+
       "-f", "hls",
       "-hls_time", "1",
       "-hls_list_size", "10",
-      "-hls_flags", "delete_segments+append_list",
-      "-hls_segment_filename", join(mediaDir, "%03d.ts"),
-      join(mediaDir, "index.m3u8")
+      "-hls_flags", "delete_segments+append_list+independent_segments",
+
+      "-hls_segment_filename", join(mediaDir, "stream_%v_%03d.ts"),
+      "-master_pl_name", "master.m3u8",
+      "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p",
+      join(mediaDir, "index_%v.m3u8")
     ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
     ff.stderr?.on("data", (data) => {
@@ -71,5 +97,5 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
     });
   });
 
-  spawn(cloudflaredBin, ["tunnel", "run", "--token", token], { stdio: "inherit", shell: false });
+  // spawn(cloudflaredBin, ["tunnel", "run", "--token", token], { stdio: "inherit", shell: false });
 };
