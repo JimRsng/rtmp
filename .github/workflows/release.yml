@@ -29,9 +29,14 @@ jobs:
         
       - name: ⚡ Build and compile
         run: node --run compile
+
+      - name: 🏷️ Rename release asset
+        run: mv pkg/jim-rtmp.exe pkg/jim-rtmp-${{ github.ref_name }}.exe
+
+      - name: 📝 Create release notes
+        run: npx changelogen gh release --token ${{ secrets.GITHUB_TOKEN }}
         
       - name: 📤 Publish assets
         uses: softprops/action-gh-release@v3
         with:
-          files: |
-            pkg/*.exe
+          files: pkg/*.exe
