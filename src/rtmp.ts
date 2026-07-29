@@ -2,17 +2,23 @@ import { join } from "node:path";
 import { spawn } from "node:child_process";
 import NodeMediaServer from "node-media-server";
 import { install } from "cloudflared";
-import { getDirs, startDirs } from "./utils/helpers.ts";
+import { getDirs, setupDirs } from "./utils/helpers.ts";
 import { installFFmpeg } from "./utils/ffmpeg-install.ts";
 
 export const runRtmp = async (token: string, options: { port: number }): Promise<void> => {
-  await startDirs();
+  const isWindows = process.platform === "win32";
+
+  await setupDirs();
   const { runtimeDir, mediaDir } = await getDirs();
-  const cloudflaredBin = join(runtimeDir, process.platform === "win32" ? "cloudflared.exe" : "cloudflared");
-  const ffmpegBin = join(runtimeDir, process.platform === "win32" ? "ffmpeg.exe" : "ffmpeg");
-  await installFFmpeg({ target: process.platform === "win32" ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64" });
+
+  const cloudflaredBin = join(runtimeDir, isWindows ? "cloudflared.exe" : "cloudflared");
+  const ffmpegBin = join(runtimeDir, isWindows ? "ffmpeg.exe" : "ffmpeg");
+
+  await installFFmpeg({ target: isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64" });
   await install(cloudflaredBin);
+
   spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
+
   const nms = new NodeMediaServer({
     // @ts-expect-error No bind type
     bind: "127.0.0.1",

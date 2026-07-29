@@ -2,7 +2,7 @@ import { mkdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-export const startDirs = async () => {
+export const setupDirs = async () => {
   const { runtimeDir, mediaDir } = await getDirs();
   await mkdir(runtimeDir, { recursive: true });
   await rm(mediaDir, { recursive: true, force: true }).catch(() => null);
