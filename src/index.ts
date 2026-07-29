@@ -9,6 +9,7 @@ const promptToken = async (): Promise<string> => {
   return new Promise((resolve) => {
     rl.question("Ingresar Tunnel Token: ", (answer) => {
       resolve(answer);
+      rl.close();
     });
   });
 };
