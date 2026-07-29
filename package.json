@@ -34,7 +34,9 @@
     "lint:fix": "oxlint --fix",
     "build": "obuild",
     "compile": "obuild && pkg dist/index.mjs --config package.json --output pkg/jim-rtmp.exe",
-    "release": "changelogen --release --no-github && git push --follow-tags"
+    "test:types": "tsc --noEmit",
+    "checks": "node --run lint && node --run test:types && node --run build",
+    "release": "node --run checks && changelogen --release --no-github && git push --follow-tags"
   },
   "bin": "dist/index.mjs",
   "pkg": {
