@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.2...v0.0.3)
+
+### 🔥 Performance
+
+- Improve latency + add logs ([cfecf1a](https://github.com/JimRsng/rtmp/commit/cfecf1a))
+
+### 🩹 Fixes
+
+- JSON import assertion and startup log ([734445e](https://github.com/JimRsng/rtmp/commit/734445e))
+
+### 🏡 Chore
+
+- Sync version ([eb2fc54](https://github.com/JimRsng/rtmp/commit/eb2fc54))
+
+### 🤖 CI
+
+- **release:** Automate release workflow ([b460a19](https://github.com/JimRsng/rtmp/commit/b460a19))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.2
 
 
