@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.5...v0.0.6)
+
+### 📦 Build
+
+- **compile:** Remove sea mode ([9f8a48c](https://github.com/JimRsng/rtmp/commit/9f8a48c))
+
+### 🏡 Chore
+
+- Update pnpm ([0918b43](https://github.com/JimRsng/rtmp/commit/0918b43))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.0.5
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.4...v0.0.5)

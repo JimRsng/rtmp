@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "rtmp",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An RTMP project for JimRsng's streaming space.",
   "type": "module",
   "license": "MIT",
