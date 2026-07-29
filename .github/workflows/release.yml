@@ -38,6 +38,7 @@ jobs:
         with:
           draft: true
           files: pkg/*.exe
+          fail_on_unmatched_files: true
 
       - name: 📝 Create release notes
         run: npx changelogen gh release --token ${{ secrets.GITHUB_TOKEN }}
