@@ -30,10 +30,9 @@ const main = defineCommand({
     console.info(`Starting ${pkg.name} v${pkg.version}...`);
     try {
       const token = args.token || await promptToken();
-      if (token) {
-        runHttp({ port: 8080 });
-        await runRtmp(token, { port: 5740 });
-      }
+      if (!token) return;
+      runHttp({ port: 8080 });
+      await runRtmp(token, { port: 5740 });
     }
     catch (err) {
       console.error(err);
