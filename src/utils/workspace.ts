@@ -28,7 +28,6 @@ export class Workspace {
 
     // Directories to be created for the workspace
     await Promise.all([
-      mkdir(Workspace.path, { recursive: true }),
       mkdir(Workspace.dirs.media, { recursive: true }),
       mkdir(Workspace.dirs.cache, { recursive: true })
     ]);
