@@ -1,18 +1,9 @@
-import { createInterface } from "node:readline";
 import { defineCommand, runMain } from "citty";
+import pkg from "../package.json" with { type: "json" };
 import { runRtmp } from "./rtmp.ts";
 import { runHttp } from "./http.ts";
-import pkg from "../package.json" with { type: "json" };
-
-const promptToken = async (): Promise<string> => {
-  const rl = createInterface({ input: process.stdin, output: process.stdout });
-  return new Promise((resolve) => {
-    rl.question("Ingresar Tunnel Token: ", (answer) => {
-      resolve(answer);
-      rl.close();
-    });
-  });
-};
+import { Workspace } from "./utils/workspace.ts";
+import { prompt } from "./utils/prompt.ts";
 
 const main = defineCommand({
   meta: {
@@ -29,14 +20,33 @@ const main = defineCommand({
       type: "boolean",
       description: "Run without Cloudflare Tunnel",
       required: false
+    },
+    remember: {
+      type: "boolean",
+      description: "Remember the token for future runs",
+      required: false
     }
   },
   async run ({ args }) {
     console.info(`Starting ${pkg.name} v${pkg.version}...`);
     try {
-      const token = args.dev ? undefined : args.token || await promptToken();
+      const workspace = await Workspace.setup("jim-rtmp");
+
+      const cachedToken = await workspace.cache.read("token.txt");
+      const token = args.token || cachedToken || await prompt("Ingresar Tunnel Token: ");
+
+      if (!args.dev && !cachedToken && token) {
+        const shouldRemember = args.remember || (
+          await prompt("¿Desea recordar el token? (Y/n): ")
+        ).trim().toLowerCase() !== "n";
+
+        if (shouldRemember) {
+          await workspace.cache.write("token.txt", token);
+        }
+      }
+
       runHttp({ port: 8080 });
-      await runRtmp({ token, port: 5740 });
+      await runRtmp({ port: 5740, token: args.dev ? undefined : token });
     }
     catch (err) {
       console.error(err);

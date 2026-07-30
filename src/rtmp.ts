@@ -2,17 +2,14 @@ import { join } from "node:path";
 import { spawn } from "node:child_process";
 import NodeMediaServer from "node-media-server";
 import { install } from "cloudflared";
-import { getDirs, setupDirs } from "./utils/helpers.ts";
+import { Workspace } from "./utils/workspace.ts";
 import { installFFmpeg } from "./utils/ffmpeg-install.ts";
 
 export const runRtmp = async (options: { token?: string, port: number }): Promise<void> => {
   const isWindows = process.platform === "win32";
 
-  await setupDirs();
-  const { runtimeDir, mediaDir } = await getDirs();
-
-  const cloudflaredBin = join(runtimeDir, isWindows ? "cloudflared.exe" : "cloudflared");
-  const ffmpegBin = join(runtimeDir, isWindows ? "ffmpeg.exe" : "ffmpeg");
+  const cloudflaredBin = join(Workspace.path, isWindows ? "cloudflared.exe" : "cloudflared");
+  const ffmpegBin = join(Workspace.path, isWindows ? "ffmpeg.exe" : "ffmpeg");
 
   await installFFmpeg({ target: isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64" });
 
@@ -71,10 +68,10 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
       "-hls_list_size", "1",
       "-hls_flags", "delete_segments+append_list+independent_segments",
 
-      "-hls_segment_filename", join(mediaDir, "%v_%01d.ts"),
+      "-hls_segment_filename", join(Workspace.dirs.media, "%v_%01d.ts"),
       "-master_pl_name", "master.m3u8",
       "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p",
-      join(mediaDir, "%v.m3u8")
+      join(Workspace.dirs.media, "%v.m3u8")
     ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
     ff.stdout?.on("data", (data) => {

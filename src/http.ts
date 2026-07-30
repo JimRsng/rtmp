@@ -1,9 +1,9 @@
 import { createServerAdapter } from "@whatwg-node/server";
 import { createServer } from "node:http";
 import { AutoRouter, cors, json } from "itty-router";
-import { getDirs } from "./utils/helpers.ts";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { Workspace } from "./utils/workspace.ts";
 import { ErrorCode } from "./utils/errors.ts";
 
 const { preflight, corsify } = cors({ origin: "*" });
@@ -18,8 +18,7 @@ router.get("/live/:file", async (req) => {
   if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
     return json({ error: "Invalid segment" }, { status: ErrorCode.BAD_REQUEST });
   }
-  const { mediaDir } = await getDirs();
-  const filePath = join(mediaDir, file);
+  const filePath = join(Workspace.dirs.media, file);
   const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
     return json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND });
