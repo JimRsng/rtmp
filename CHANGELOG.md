@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.6...v0.0.7)
+
+### 🚀 Enhancements
+
+- Add multi-quality HLS master playlist output ([81e8697](https://github.com/JimRsng/rtmp/commit/81e8697))
+
+### 🩹 Fixes
+
+- Uncomment cloudflared tunnel spawn ([efea45a](https://github.com/JimRsng/rtmp/commit/efea45a))
+- Improve player with list size 1 and remove epoch hls start number ([d587e26](https://github.com/JimRsng/rtmp/commit/d587e26))
+
+### 🏡 Chore
+
+- Lint ([1d6c7b6](https://github.com/JimRsng/rtmp/commit/1d6c7b6))
+- Use epoch HLS sequence and silence FFmpeg stderr ([1f5770a](https://github.com/JimRsng/rtmp/commit/1f5770a))
+- Use 1-digit HLS segment numbering ([3b7bd61](https://github.com/JimRsng/rtmp/commit/3b7bd61))
+
+### 🤖 CI
+
+- **release:** Use github release script with env set ([a9399a4](https://github.com/JimRsng/rtmp/commit/a9399a4))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.0.6
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.5...v0.0.6)
