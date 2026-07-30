@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.7...v0.0.8)
+
+### 🚀 Enhancements
+
+- Add dev mode without cloudflare tunnel ([c682873](https://github.com/JimRsng/rtmp/commit/c682873))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.7
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.6...v0.0.7)
