@@ -21,6 +21,6 @@ await resedit({
       productVersion: version,
       companyName: owner,
       legalCopyright: `© ${new Date().getFullYear()} ${owner}`
-    },
+    }
   }
 });
