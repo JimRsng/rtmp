@@ -64,7 +64,7 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
       "-flags", "low_delay",
 
       "-f", "hls",
-      "-hls_time", "12",
+      "-hls_time", "5",
       "-hls_list_size", "3",
       "-hls_flags", "delete_segments+append_list+independent_segments",
 
