@@ -28,6 +28,9 @@ router.get("/live/jimrsng.m3u8", async () => {
 
 router.get("/live/:segment", async (req) => {
   const { segment } = req.params as { segment: string };
+  if (!/^[\w-]+\.ts$/.test(segment)) {
+    return json({ error: "Invalid segment" }, { status: 400 });
+  }
   const { mediaDir } = await getDirs();
   const filePath = join(mediaDir, segment);
   const buf = await readFile(filePath).catch(() => null);
