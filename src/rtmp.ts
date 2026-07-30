@@ -59,8 +59,8 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
 
       "-f", "hls",
       "-hls_time", "5",
-      "-hls_list_size", "3",
-      "-hls_flags", "delete_segments+append_list+independent_segments",
+      "-hls_list_size", "4",
+      "-hls_flags", "delete_segments+append_list+independent_segments+omit_endlist",
 
       "-hls_segment_filename", join(Workspace.dirs.media, "%v_%01d.ts"),
       "-master_pl_name", "master.m3u8",
