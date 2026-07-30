@@ -33,19 +33,15 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
     const ff = spawn(ffmpegBin, [
       "-i", `rtmp://${streamHost}:${options.port}${streamPath}`,
 
-      // 3 calidades: 1080p, 720p, 480p
+      // 2 calidades: 1080p, 720p
       "-filter_complex",
-      "[0:v]split=3[v1080][v720][v480];" +
-      "[v1080]scale=1920:1080:force_original_aspect_ratio=decrease:force_divisible_by=2," +
-      "pad=1920:1080:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v1080out];" +
+      "[0:v]split=2[v1080][v720];" +
+      "[v1080]copy[v1080out];" +
       "[v720]scale=1280:720:force_original_aspect_ratio=decrease:force_divisible_by=2," +
-      "pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v720out];" +
-      "[v480]scale=854:480:force_original_aspect_ratio=decrease:force_divisible_by=2," +
-      "pad=854:480:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v480out]",
+      "pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v720out]",
 
       "-map", "[v1080out]", "-map", "0:a:0",
       "-map", "[v720out]", "-map", "0:a:0",
-      "-map", "[v480out]", "-map", "0:a:0",
 
       "-c:v", "libx264",
       "-preset", "veryfast",
@@ -53,12 +49,10 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
 
       "-b:v:0", "4500k", "-maxrate:v:0", "8000k", "-bufsize:v:0", "14000k",
       "-b:v:1", "2500k", "-maxrate:v:1", "3500k", "-bufsize:v:1", "6000k",
-      "-b:v:2", "1200k", "-maxrate:v:2", "1800k", "-bufsize:v:2", "2800k",
 
       "-c:a", "aac",
       "-b:a:0", "192k",
       "-b:a:1", "128k",
-      "-b:a:2", "96k",
 
       "-fflags", "nobuffer",
       "-flags", "low_delay",
@@ -70,7 +64,7 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
 
       "-hls_segment_filename", join(Workspace.dirs.media, "%v_%01d.ts"),
       "-master_pl_name", "master.m3u8",
-      "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p v:2,a:2,name:480p",
+      "-var_stream_map", "v:0,a:0,name:1080p v:1,a:1,name:720p",
       join(Workspace.dirs.media, "%v.m3u8")
     ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
