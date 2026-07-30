@@ -1,6 +1,6 @@
 import { createServerAdapter } from "@whatwg-node/server";
 import { createServer } from "node:http";
-import { AutoRouter, cors } from "itty-router"; // ~1kB
+import { AutoRouter, cors, json } from "itty-router";
 import { getDirs } from "./utils/helpers.ts";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -17,7 +17,7 @@ router.get("/live/jimrsng.m3u8", async () => {
   const filePath = join(mediaDir, "master.m3u8");
   const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
-    return new Response("File not found", { status: 404 });
+    return json({ error: "File not found" }, { status: 404 });
   }
   return new Response(buf, {
     headers: {
@@ -32,7 +32,7 @@ router.get("/live/:segment", async (req) => {
   const filePath = join(mediaDir, segment);
   const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
-    return new Response("File not found", { status: 404 });
+    return json({ error: "File not found" }, { status: 404 });
   }
   return new Response(buf, {
     headers: {
