@@ -65,7 +65,7 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
 
       "-f", "hls",
       "-hls_time", "12",
-      "-hls_list_size", "1",
+      "-hls_list_size", "3",
       "-hls_flags", "delete_segments+append_list+independent_segments",
 
       "-hls_segment_filename", join(Workspace.dirs.media, "%v_%01d.ts"),
