@@ -5,7 +5,7 @@ import { install } from "cloudflared";
 import { getDirs, setupDirs } from "./utils/helpers.ts";
 import { installFFmpeg } from "./utils/ffmpeg-install.ts";
 
-export const runRtmp = async (token: string, options: { port: number }): Promise<void> => {
+export const runRtmp = async (options: { token?: string, port: number }): Promise<void> => {
   const isWindows = process.platform === "win32";
 
   await setupDirs();
@@ -15,9 +15,6 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
   const ffmpegBin = join(runtimeDir, isWindows ? "ffmpeg.exe" : "ffmpeg");
 
   await installFFmpeg({ target: isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64" });
-  await install(cloudflaredBin);
-
-  spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
 
   const nms = new NodeMediaServer({
     // @ts-expect-error No bind type
@@ -93,5 +90,9 @@ export const runRtmp = async (token: string, options: { port: number }): Promise
     });
   });
 
-  spawn(cloudflaredBin, ["tunnel", "run", "--token", token], { stdio: "inherit", shell: false });
+  if (options.token) {
+    await install(cloudflaredBin);
+    spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
+    spawn(cloudflaredBin, ["tunnel", "run", "--token", options.token], { stdio: "inherit", shell: false });
+  }
 };

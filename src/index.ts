@@ -22,17 +22,21 @@ const main = defineCommand({
   args: {
     token: {
       type: "string",
-      description: "Tunnel token",
+      description: "Cloudflare Tunnel token",
+      required: false
+    },
+    dev: {
+      type: "boolean",
+      description: "Run without Cloudflare Tunnel",
       required: false
     }
   },
   async run ({ args }) {
     console.info(`Starting ${pkg.name} v${pkg.version}...`);
     try {
-      const token = args.token || await promptToken();
-      if (!token) return;
+      const token = args.dev ? undefined : args.token || await promptToken();
       runHttp({ port: 8080 });
-      await runRtmp(token, { port: 5740 });
+      await runRtmp({ token, port: 5740 });
     }
     catch (err) {
       console.error(err);
