@@ -21,7 +21,7 @@ export class Workspace {
       Workspace.dirs[folder] = join(Workspace.path, folder);
     }
 
-    // Directories to be cleared before creating the workspace
+    // Directories to be cleared before setting up the workspace
     await Promise.all([
       rm(Workspace.dirs.media, { recursive: true, force: true })
     ]);
