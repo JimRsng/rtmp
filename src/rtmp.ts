@@ -48,7 +48,7 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
       "-map", "[v480out]", "-map", "0:a:0",
 
       "-c:v", "libx264",
-      "-preset", "faster",
+      "-preset", "veryfast",
       "-tune", "zerolatency",
 
       "-b:v:0", "4500k", "-maxrate:v:0", "8000k", "-bufsize:v:0", "14000k",
