@@ -13,34 +13,20 @@ const router = AutoRouter({
   finally: [corsify]
 });
 
-router.get("/live/jimrsng.m3u8", async () => {
-  const { mediaDir } = await getDirs();
-  const filePath = join(mediaDir, "master.m3u8");
-  const buf = await readFile(filePath).catch(() => null);
-  if (!buf) {
-    return json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND });
-  }
-  return new Response(buf, {
-    headers: {
-      "Content-Type": "application/vnd.apple.mpegurl"
-    }
-  });
-});
-
-router.get("/live/:segment", async (req) => {
-  const { segment } = req.params as { segment: string };
-  if (!/^[\w-]+\.ts$/.test(segment)) {
+router.get("/live/:file", async (req) => {
+  const { file } = req.params as { file: string };
+  if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
     return json({ error: "Invalid segment" }, { status: ErrorCode.BAD_REQUEST });
   }
   const { mediaDir } = await getDirs();
-  const filePath = join(mediaDir, segment);
+  const filePath = join(mediaDir, file);
   const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
     return json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND });
   }
   return new Response(buf, {
     headers: {
-      "Content-Type": "video/MP2T"
+      "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T"
     }
   });
 });
