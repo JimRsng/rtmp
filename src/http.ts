@@ -18,26 +18,11 @@ router.get("/live/:file", async (req) => {
   if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
     return json({ error: "Invalid segment" }, { status: ErrorCode.BAD_REQUEST });
   }
-
-  const isM3U8 = file.includes(".m3u8");
   const filePath = join(Workspace.dirs.media, file);
-  let buf = await readFile(filePath, isM3U8 ? "utf8" : undefined).catch(() => null);
-
+  const buf = await readFile(filePath).catch(() => null);
   if (!buf) {
     return json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND });
   }
-
-  if (file !== "master.m3u8" && isM3U8 && buf && typeof buf === "string") {
-    const lines = buf.trim().split(/\r?\n/);
-    for (let i = lines.length - 1; i >= 0; i--) {
-      if (lines[i]?.startsWith("#EXTINF:")) {
-        lines.splice(i, 2);
-        break;
-      }
-    }
-    buf = lines.join("\n");
-  }
-
   return new Response(buf, {
     headers: {
       "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T"
