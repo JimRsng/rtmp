@@ -65,7 +65,11 @@ const main = defineCommand({
       }
 
       runHttp({ port: 8080 });
-      await runRtmp({ port: 5740, token: args.dev ? undefined : token });
+      await runRtmp({
+        host: "127.0.0.1",
+        port: 5740,
+        cloudflared: args.dev ? undefined : { token }
+      });
     }
     catch (err) {
       console.error(err);
