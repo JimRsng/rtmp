@@ -1,6 +1,65 @@
 # Changelog
 
 
+## v0.1.0
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.8...v0.1.0)
+
+### 🚀 Enhancements
+
+- **http:** Return errors as json ([593faac](https://github.com/JimRsng/rtmp/commit/593faac))
+- **http:** Unify live file route for m3u8 and ts files ([edd0177](https://github.com/JimRsng/rtmp/commit/edd0177))
+- **script:** Compile with zstd compression ([21b0d44](https://github.com/JimRsng/rtmp/commit/21b0d44))
+- Introduce token caching and workspace utils ([fa93d69](https://github.com/JimRsng/rtmp/commit/fa93d69))
+- **exe:** Add metadata and icon via resedit-cli after compile ([9b845d6](https://github.com/JimRsng/rtmp/commit/9b845d6))
+- Trim latest segment from live m3u8 output ([54dca51](https://github.com/JimRsng/rtmp/commit/54dca51))
+- ⚠️  Run rtmp ingest directly with ffmpeg, drop node-media-server ([7e1fbd8](https://github.com/JimRsng/rtmp/commit/7e1fbd8))
+- Add consola for UX + json token validation ([f34c038](https://github.com/JimRsng/rtmp/commit/f34c038))
+
+### 🔥 Performance
+
+- **rtmp:** Increase segment duration to 12s ([00fb0b8](https://github.com/JimRsng/rtmp/commit/00fb0b8))
+
+### 🩹 Fixes
+
+- **http:** Path traversal vulnerability ([7d5d054](https://github.com/JimRsng/rtmp/commit/7d5d054))
+- Increase hls list size to 3 ([b076a83](https://github.com/JimRsng/rtmp/commit/b076a83))
+- Reduce HLS segment duration to 5s ([f3f1c9f](https://github.com/JimRsng/rtmp/commit/f3f1c9f))
+- Delete cached token on invalid tunnel token ([cda4cc7](https://github.com/JimRsng/rtmp/commit/cda4cc7))
+
+### 💅 Refactors
+
+- **ffmpeg:** Remove 480p output ([93554c8](https://github.com/JimRsng/rtmp/commit/93554c8))
+- **ffmpeg:** Improve hls streaming settings ([3186437](https://github.com/JimRsng/rtmp/commit/3186437))
+
+### 📖 Documentation
+
+- Update readme description ([aec7560](https://github.com/JimRsng/rtmp/commit/aec7560))
+
+### 📦 Build
+
+- **consola:** Patch undefined values on windows console ([a2837ca](https://github.com/JimRsng/rtmp/commit/a2837ca))
+
+### 🏡 Chore
+
+- Use ErrorCode enum for http status responses ([5c8ee0c](https://github.com/JimRsng/rtmp/commit/5c8ee0c))
+- Replace ofetch with $fetch ([1d9f4d4](https://github.com/JimRsng/rtmp/commit/1d9f4d4))
+- Workspace path is already created by its dirs ([4ed7b94](https://github.com/JimRsng/rtmp/commit/4ed7b94))
+- Update code comment ([bd0c461](https://github.com/JimRsng/rtmp/commit/bd0c461))
+- **ffmpeg:** Update preset to veryfast ([7e021f8](https://github.com/JimRsng/rtmp/commit/7e021f8))
+- Lint ([8c2be1f](https://github.com/JimRsng/rtmp/commit/8c2be1f))
+- **http:** Update file request error message ([40ed2cf](https://github.com/JimRsng/rtmp/commit/40ed2cf))
+- Data is transformed to String with backticks ([c28ba06](https://github.com/JimRsng/rtmp/commit/c28ba06))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Run rtmp ingest directly with ffmpeg, drop node-media-server ([7e1fbd8](https://github.com/JimRsng/rtmp/commit/7e1fbd8))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.0.8
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.7...v0.0.8)
