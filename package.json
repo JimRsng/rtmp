@@ -49,6 +49,7 @@
     "changelogen": "^0.6.2",
     "citty": "^0.2.2",
     "cloudflared": "^0.7.1",
+    "consola": "^3.4.2",
     "itty-router": "^5.0.24",
     "obuild": "^0.4.38",
     "ofetch": "^1.5.1",

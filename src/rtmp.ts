@@ -1,6 +1,7 @@
 import { join } from "node:path";
 import { spawn } from "node:child_process";
 import { install } from "cloudflared";
+import { consola } from "consola";
 import { Workspace } from "./utils/workspace.ts";
 import { installFFmpeg } from "./utils/ffmpeg-install.ts";
 import { hlsArgs } from "./utils/ffmpeg.ts";
@@ -20,12 +21,12 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
     ...hlsArgs()
   ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
-  ff.stderr?.on("data", (data) => {
-    console.info(`[FFmpeg ffmpeg-only] ${data}`);
+  ff.stderr.on("data", (data: Buffer) => {
+    console.info(`[FFmpeg ffmpeg-only] ${data.toString().trim()}`);
   });
 
-  ff.stdout?.on("data", (data) => {
-    console.info(`[FFmpeg ffmpeg-only stdout] ${data.toString()}`);
+  ff.stdout.on("data", (data: Buffer) => {
+    console.info(`[FFmpeg ffmpeg-only stdout] ${data.toString().trim()}`);
   });
 
   ff.on("close", (code, signal) => {
@@ -38,15 +39,7 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
 
   if (options.token) {
     await install(cloudflaredBin);
-    spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
-    const tunnel = spawn(cloudflaredBin, ["tunnel", "run", "--token", options.token], { stdio: ["ignore", "pipe", "pipe"], shell: false });
-
-    tunnel.stderr.on("data", (data: Buffer) => {
-      const message = data.toString();
-      if (message.includes("Tunnel token is not valid")) {
-        Workspace.instance?.cache.delete("token.txt");
-        console.error("El token no es válido. Cierra el programa y vuelve a ejecutar con un token válido.");
-      }
-    });
+    spawn(cloudflaredBin, ["--version"], { stdio: "pipe", shell: false }).stdout.on("data", (data: Buffer) => consola.info(data.toString()));
+    spawn(cloudflaredBin, ["tunnel", "run", "--token", options.token], { stdio: "inherit", shell: false });
   }
 };
