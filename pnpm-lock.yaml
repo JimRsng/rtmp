@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  consola: 02582b5ff8bda2b31c3a4c2c63f068cf35ce8e438dde0f9b46e62e8019efcf83
+
 importers:
 
   .:
@@ -31,7 +34,7 @@ importers:
         version: 0.7.1
       consola:
         specifier: ^3.4.2
-        version: 3.4.2
+        version: 3.4.2(patch_hash=02582b5ff8bda2b31c3a4c2c63f068cf35ce8e438dde0f9b46e62e8019efcf83)
       itty-router:
         specifier: ^5.0.24
         version: 5.0.24
@@ -2486,7 +2489,7 @@ snapshots:
     dependencies:
       c12: 3.3.4
       confbox: 0.2.4
-      consola: 3.4.2
+      consola: 3.4.2(patch_hash=02582b5ff8bda2b31c3a4c2c63f068cf35ce8e438dde0f9b46e62e8019efcf83)
       convert-gitmoji: 0.1.5
       mri: 1.2.0
       node-fetch-native: 1.6.7
@@ -2534,7 +2537,7 @@ snapshots:
 
   confbox@0.2.4: {}
 
-  consola@3.4.2: {}
+  consola@3.4.2(patch_hash=02582b5ff8bda2b31c3a4c2c63f068cf35ce8e438dde0f9b46e62e8019efcf83): {}
 
   convert-gitmoji@0.1.5: {}
 
@@ -2915,7 +2918,7 @@ snapshots:
   obuild@0.4.38(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)(typescript@7.0.2):
     dependencies:
       c12: 4.0.0-beta.5(chokidar@5.0.0)(dotenv@17.4.2)(giget@3.3.1)(jiti@2.7.0)
-      consola: 3.4.2
+      consola: 3.4.2(patch_hash=02582b5ff8bda2b31c3a4c2c63f068cf35ce8e438dde0f9b46e62e8019efcf83)
       defu: 6.1.7
       exsolve: 1.1.1
       magic-string: 0.30.21

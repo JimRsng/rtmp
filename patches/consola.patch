@@ -1,0 +1,57 @@
+diff --git a/dist/chunks/prompt.mjs b/dist/chunks/prompt.mjs
+index 12685c5867f1eeed33708090e2b316aea3d26f87..89e779a6296bebf867a86bd1bd91f1cec19499ed 100644
+--- a/dist/chunks/prompt.mjs
++++ b/dist/chunks/prompt.mjs
+@@ -178,35 +178,35 @@ function J({onlyFirst:t=false}={}){const F=["[\\u001B\\u009B][[\\]()#;?]*(?:(?:(
+ `).slice(e);this.output.write(s.join(`
+ `)),this._prevFrame=u;return}this.output.write(srcExports.erase.down());}this.output.write(u),this.state==="initial"&&(this.state="active"),this._prevFrame=u;}}}class fD extends x{get cursor(){return this.value?0:1}get _value(){return this.cursor===0}constructor(u){super(u,false),this.value=!!u.initialValue,this.on("value",()=>{this.value=this._value;}),this.on("confirm",F=>{this.output.write(srcExports.cursor.move(0,-1)),this.value=F,this.state="submit",this.close();}),this.on("cursor",()=>{this.value=!this.value;});}}var bD=Object.defineProperty,mD=(t,u,F)=>u in t?bD(t,u,{enumerable:true,configurable:true,writable:true,value:F}):t[u]=F,Y=(t,u,F)=>(mD(t,typeof u!="symbol"?u+"":u,F),F);let wD=class extends x{constructor(u){super(u,false),Y(this,"options"),Y(this,"cursor",0),this.options=u.options,this.value=[...u.initialValues??[]],this.cursor=Math.max(this.options.findIndex(({value:F})=>F===u.cursorAt),0),this.on("key",F=>{F==="a"&&this.toggleAll();}),this.on("cursor",F=>{switch(F){case "left":case "up":this.cursor=this.cursor===0?this.options.length-1:this.cursor-1;break;case "down":case "right":this.cursor=this.cursor===this.options.length-1?0:this.cursor+1;break;case "space":this.toggleValue();break}});}get _value(){return this.options[this.cursor].value}toggleAll(){const u=this.value.length===this.options.length;this.value=u?[]:this.options.map(F=>F.value);}toggleValue(){const u=this.value.includes(this._value);this.value=u?this.value.filter(F=>F!==this._value):[...this.value,this._value];}};var SD=Object.defineProperty,$D=(t,u,F)=>u in t?SD(t,u,{enumerable:true,configurable:true,writable:true,value:F}):t[u]=F,q=(t,u,F)=>($D(t,typeof u!="symbol"?u+"":u,F),F);class jD extends x{constructor(u){super(u,false),q(this,"options"),q(this,"cursor",0),this.options=u.options,this.cursor=this.options.findIndex(({value:F})=>F===u.initialValue),this.cursor===-1&&(this.cursor=0),this.changeValue(),this.on("cursor",F=>{switch(F){case "left":case "up":this.cursor=this.cursor===0?this.options.length-1:this.cursor-1;break;case "down":case "right":this.cursor=this.cursor===this.options.length-1?0:this.cursor+1;break}this.changeValue();});}get _value(){return this.options[this.cursor]}changeValue(){this.value=this._value.value;}}class PD extends x{get valueWithCursor(){if(this.state==="submit")return this.value;if(this.cursor>=this.value.length)return `${this.value}\u2588`;const u=this.value.slice(0,this.cursor),[F,...e$1]=this.value.slice(this.cursor);return `${u}${e.inverse(F)}${e$1.join("")}`}get cursor(){return this._cursor}constructor(u){super(u),this.on("finalize",()=>{this.value||(this.value=u.defaultValue);});}}
+ 
+-function ce(){return g.platform!=="win32"?g.env.TERM!=="linux":!!g.env.CI||!!g.env.WT_SESSION||!!g.env.TERMINUS_SUBLIME||g.env.ConEmuTask==="{cmd::Cmder}"||g.env.TERM_PROGRAM==="Terminus-Sublime"||g.env.TERM_PROGRAM==="vscode"||g.env.TERM==="xterm-256color"||g.env.TERM==="alacritty"||g.env.TERMINAL_EMULATOR==="JetBrains-JediTerm"}const V=ce(),u=(t,n)=>V?t:n,le=u("❯", ">"),L=u("■", "x"),W=u("▲", "x"),C=u("✔", "√"),o=u(""),d=u(""),k=u("\u25CF",">"),P=u("\u25CB"," "),A=u("\u25FB","[\u2022]"),T=u("\u25FC","[+]"),F=u("\u25FB","[ ]"),w=t=>{switch(t){case "initial":case "active":return e.cyan(le);case "cancel":return e.red(L);case "error":return e.yellow(W);case "submit":return e.green(C)}},B=t=>{const{cursor:n,options:s,style:r}=t,i=t.maxItems??Number.POSITIVE_INFINITY,a=Math.max(process.stdout.rows-4,0),c=Math.min(a,Math.max(i,5));let l=0;n>=l+c-3?l=Math.max(Math.min(n-c+3,s.length-c),0):n<l+2&&(l=Math.max(n-2,0));const $=c<s.length&&l>0,p=c<s.length&&l+c<s.length;return s.slice(l,l+c).map((M,v,x)=>{const j=v===0&&$,E=v===x.length-1&&p;return j||E?e.dim("..."):r(M,v+l===n)})},he=t=>new PD({validate:t.validate,placeholder:t.placeholder,defaultValue:t.defaultValue,initialValue:t.initialValue,render(){const n=`${e.gray(o)}
+-${w(this.state)} ${t.message}
++function ce(){return g.platform!=="win32"?g.env.TERM!=="linux":!!g.env.CI||!!g.env.WT_SESSION||!!g.env.TERMINUS_SUBLIME||g.env.ConEmuTask==="{cmd::Cmder}"||g.env.TERM_PROGRAM==="Terminus-Sublime"||g.env.TERM_PROGRAM==="vscode"||g.env.TERM==="xterm-256color"||g.env.TERM==="alacritty"||g.env.TERMINAL_EMULATOR==="JetBrains-JediTerm"}const V=ce(),u=(t,n)=>V?t:n,le=u("\u25C6","*"),L=u("\u25A0","x"),W=u("\u25B2","x"),C=u("\u25C7","o"),o=u("\u2502","|"),d=u("\u2514","\u2014"),k=u("\u25CF",">"),P=u("\u25CB"," "),A=u("\u25FB","[\u2022]"),T=u("\u25FC","[+]"),F=u("\u25FB","[ ]"),w=t=>{switch(t){case "initial":case "active":return e.cyan(le);case "cancel":return e.red(L);case "error":return e.yellow(W);case "submit":return e.green(C)}},B=t=>{const{cursor:n,options:s,style:r}=t,i=t.maxItems??Number.POSITIVE_INFINITY,a=Math.max(process.stdout.rows-4,0),c=Math.min(a,Math.max(i,5));let l=0;n>=l+c-3?l=Math.max(Math.min(n-c+3,s.length-c),0):n<l+2&&(l=Math.max(n-2,0));const $=c<s.length&&l>0,p=c<s.length&&l+c<s.length;return s.slice(l,l+c).map((M,v,x)=>{const j=v===0&&$,E=v===x.length-1&&p;return j||E?e.dim("..."):r(M,v+l===n)})},he=t=>new PD({validate:t.validate,placeholder:t.placeholder,defaultValue:t.defaultValue,initialValue:t.initialValue,render(){const n=`${e.gray(o)}
++${w(this.state)}  ${t.message}
+ `,s=t.placeholder?e.inverse(t.placeholder[0])+e.dim(t.placeholder.slice(1)):e.inverse(e.hidden("_")),r=this.value?this.valueWithCursor:s;switch(this.state){case "error":return `${n.trim()}
+-${e.yellow(o)} ${r}
+-${e.yellow(d)} ${e.yellow(this.error)}
+-`;case "submit":return `${n}${e.gray(o)} ${e.dim(this.value||t.placeholder)}`;case "cancel":return `${n}${e.gray(o)} ${e.strikethrough(e.dim(this.value??""))}${this.value?.trim()?`
+-${e.gray(o)}`:""}`;default:return `${n}${e.cyan(o)} ${r}
++${e.yellow(o)}  ${r}
++${e.yellow(d)}  ${e.yellow(this.error)}
++`;case "submit":return `${n}${e.gray(o)}  ${e.dim(this.value||t.placeholder)}`;case "cancel":return `${n}${e.gray(o)}  ${e.strikethrough(e.dim(this.value??""))}${this.value?.trim()?`
++${e.gray(o)}`:""}`;default:return `${n}${e.cyan(o)}  ${r}
+ ${e.cyan(d)}
+ `}}}).prompt(),ye=t=>{const n=t.active??"Yes",s=t.inactive??"No";return new fD({active:n,inactive:s,initialValue:t.initialValue??true,render(){const r=`${e.gray(o)}
+-${w(this.state)} ${t.message}
+-`,i=this.value?n:s;switch(this.state){case "submit":return `${r}${e.gray(o)} ${e.dim(i)}`;case "cancel":return `${r}${e.gray(o)} ${e.strikethrough(e.dim(i))}
+-${e.gray(o)}`;default:return `${r}${e.cyan(o)} ${this.value?`${e.green(k)} ${n}`:`${e.dim(P)} ${e.dim(n)}`} ${e.dim("/")} ${this.value?`${e.dim(P)} ${e.dim(s)}`:`${e.green(k)} ${s}`}
++${w(this.state)}  ${t.message}
++`,i=this.value?n:s;switch(this.state){case "submit":return `${r}${e.gray(o)}  ${e.dim(i)}`;case "cancel":return `${r}${e.gray(o)}  ${e.strikethrough(e.dim(i))}
++${e.gray(o)}`;default:return `${r}${e.cyan(o)}  ${this.value?`${e.green(k)} ${n}`:`${e.dim(P)} ${e.dim(n)}`} ${e.dim("/")} ${this.value?`${e.dim(P)} ${e.dim(s)}`:`${e.green(k)} ${s}`}
+ ${e.cyan(d)}
+ `}}}).prompt()},ve=t=>{const n=(s,r)=>{const i=s.label??String(s.value);switch(r){case "selected":return `${e.dim(i)}`;case "active":return `${e.green(k)} ${i} ${s.hint?e.dim(`(${s.hint})`):""}`;case "cancelled":return `${e.strikethrough(e.dim(i))}`;default:return `${e.dim(P)} ${e.dim(i)}`}};return new jD({options:t.options,initialValue:t.initialValue,render(){const s=`${e.gray(o)}
+-${w(this.state)} ${t.message}
+-`;switch(this.state){case "submit":return `${s}${e.gray(o)} ${n(this.options[this.cursor],"selected")}`;case "cancel":return `${s}${e.gray(o)} ${n(this.options[this.cursor],"cancelled")}
+-${e.gray(o)}`;default:return `${s}${e.cyan(o)} ${B({cursor:this.cursor,options:this.options,maxItems:t.maxItems,style:(r,i)=>n(r,i?"active":"inactive")}).join(`
++${w(this.state)}  ${t.message}
++`;switch(this.state){case "submit":return `${s}${e.gray(o)}  ${n(this.options[this.cursor],"selected")}`;case "cancel":return `${s}${e.gray(o)}  ${n(this.options[this.cursor],"cancelled")}
++${e.gray(o)}`;default:return `${s}${e.cyan(o)}  ${B({cursor:this.cursor,options:this.options,maxItems:t.maxItems,style:(r,i)=>n(r,i?"active":"inactive")}).join(`
+ ${e.cyan(o)}  `)}
+ ${e.cyan(d)}
+ `}}}).prompt()},fe=t=>{const n=(s,r)=>{const i=s.label??String(s.value);return r==="active"?`${e.cyan(A)} ${i} ${s.hint?e.dim(`(${s.hint})`):""}`:r==="selected"?`${e.green(T)} ${e.dim(i)}`:r==="cancelled"?`${e.strikethrough(e.dim(i))}`:r==="active-selected"?`${e.green(T)} ${i} ${s.hint?e.dim(`(${s.hint})`):""}`:r==="submitted"?`${e.dim(i)}`:`${e.dim(F)} ${e.dim(i)}`};return new wD({options:t.options,initialValues:t.initialValues,required:t.required??true,cursorAt:t.cursorAt,validate(s){if(this.required&&s.length===0)return `Please select at least one option.
+ ${e.reset(e.dim(`Press ${e.gray(e.bgWhite(e.inverse(" space ")))} to select, ${e.gray(e.bgWhite(e.inverse(" enter ")))} to submit`))}`},render(){const s=`${e.gray(o)}
+-${w(this.state)} ${t.message}
+-`,r=(i,a)=>{const c=this.value.includes(i.value);return a&&c?n(i,"active-selected"):c?n(i,"selected"):n(i,a?"active":"inactive")};switch(this.state){case "submit":return `${s}${e.gray(o)} ${this.options.filter(({value:i})=>this.value.includes(i)).map(i=>n(i,"submitted")).join(e.dim(", "))||e.dim("none")}`;case "cancel":{const i=this.options.filter(({value:a})=>this.value.includes(a)).map(a=>n(a,"cancelled")).join(e.dim(", "));return `${s}${e.gray(o)} ${i.trim()?`${i}
++${w(this.state)}  ${t.message}
++`,r=(i,a)=>{const c=this.value.includes(i.value);return a&&c?n(i,"active-selected"):c?n(i,"selected"):n(i,a?"active":"inactive")};switch(this.state){case "submit":return `${s}${e.gray(o)}  ${this.options.filter(({value:i})=>this.value.includes(i)).map(i=>n(i,"submitted")).join(e.dim(", "))||e.dim("none")}`;case "cancel":{const i=this.options.filter(({value:a})=>this.value.includes(a)).map(a=>n(a,"cancelled")).join(e.dim(", "));return `${s}${e.gray(o)}  ${i.trim()?`${i}
+ ${e.gray(o)}`:""}`}case "error":{const i=this.error.split(`
+-`).map((a,c)=>c===0?`${e.yellow(d)} ${e.yellow(a)}`:`   ${a}`).join(`
+-`);return `${s+e.yellow(o)} ${B({options:this.options,cursor:this.cursor,maxItems:t.maxItems,style:r}).join(`
++`).map((a,c)=>c===0?`${e.yellow(d)}  ${e.yellow(a)}`:`   ${a}`).join(`
++`);return `${s+e.yellow(o)}  ${B({options:this.options,cursor:this.cursor,maxItems:t.maxItems,style:r}).join(`
+ ${e.yellow(o)}  `)}
+ ${i}
+-`}default:return `${s}${e.cyan(o)} ${B({options:this.options,cursor:this.cursor,maxItems:t.maxItems,style:r}).join(`
++`}default:return `${s}${e.cyan(o)}  ${B({options:this.options,cursor:this.cursor,maxItems:t.maxItems,style:r}).join(`
+ ${e.cyan(o)}  `)}
+ ${e.cyan(d)}
+ `}}}).prompt()};`${e.gray(o)}  `;

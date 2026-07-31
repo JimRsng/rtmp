@@ -5,3 +5,6 @@ allowBuilds:
   esbuild: false
   ffmpeg-static: false
   unrs-resolver: false
+
+patchedDependencies:
+  consola: patches/consola.patch
