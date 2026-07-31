@@ -37,9 +37,11 @@ const main = defineCommand({
       const workspace = await Workspace.setup(APP.name);
 
       const cachedToken = await workspace.cache.read("token.txt");
-      const token = args.token || cachedToken || await consola.prompt("Ingresar Tunnel Token: ", { type: "text" });
+      const token = args.dev ? undefined : (
+        args.token || cachedToken || await consola.prompt("Ingresar Tunnel Token: ", { type: "text" })
+      );
 
-      if (!isValidToken(token)) {
+      if (token && !isValidToken(token)) {
         workspace.cache.delete("token.txt");
         consola.error("El token no es válido. Cierra el programa y vuelve a ejecutar con un token válido.");
         consola.info("Presione cualquier tecla para salir...");
@@ -68,7 +70,7 @@ const main = defineCommand({
       await runRtmp({
         host: "127.0.0.1",
         port: 5740,
-        cloudflared: args.dev ? undefined : { token }
+        cloudflared: args.dev || !token ? undefined : { token }
       });
     }
     catch (err) {
