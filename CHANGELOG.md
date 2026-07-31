@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.3...v0.1.4)
+
+### 🩹 Fixes
+
+- Increase hls list size from 5 to 500 ([f60309f](https://github.com/JimRsng/rtmp/commit/f60309f))
+
+### 📖 Documentation
+
+- Update readme ([9bae139](https://github.com/JimRsng/rtmp/commit/9bae139))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.3
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.2...v0.1.3)
