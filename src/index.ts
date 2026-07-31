@@ -30,11 +30,24 @@ const main = defineCommand({
     }
   },
   async run ({ args }) {
-    await checkForUpdates();
     consola.info(`Ejecutando ${APP.name} v${APP.version}`);
     try {
       consola.start("Configurando entorno...");
       const workspace = await Workspace.setup(APP.name);
+
+      if (!args.dev) {
+        const { isUpdateAvailable, updateApp } = await checkForUpdates();
+        if (isUpdateAvailable && (await consola.prompt("¿Desea actualizar a la última versión?", {
+          type: "select",
+          initial: "Y",
+          options: [
+            { label: "Sí", value: "Y", hint: "Se descargará la última versión" },
+            { label: "No", value: "N", hint: "Se continuará con la versión actual" }
+          ]
+        })) === "Y") {
+          await updateApp();
+        }
+      }
 
       const cachedToken = await workspace.cache.read("token.txt");
       const token = args.dev ? undefined : (

@@ -36,6 +36,12 @@ export class Workspace {
     return Workspace.instance;
   }
 
+  write (filename: string, data: string) {
+    const filePath = join(Workspace.path, filename);
+    return writeFile(filePath, data);
+  }
+
+  // Media management methods
   get media () {
     return {
       clear: async () => {
@@ -45,6 +51,7 @@ export class Workspace {
     };
   }
 
+  // Cache management methods
   get cache () {
     return {
       write: async (filename: string, data: string) => {
