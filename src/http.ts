@@ -16,7 +16,7 @@ const router = AutoRouter({
 router.get("/live/:file", async (req) => {
   const { file } = req.params as { file: string };
   if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
-    return json({ error: "Invalid segment" }, { status: ErrorCode.BAD_REQUEST });
+    return json({ error: "Request not allowed" }, { status: ErrorCode.BAD_REQUEST });
   }
   const filePath = join(Workspace.dirs.media, file);
   const buf = await readFile(filePath).catch(() => null);
