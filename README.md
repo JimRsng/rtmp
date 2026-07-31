@@ -17,7 +17,7 @@ It also supports a development mode without Cloudflare Tunnel and token caching 
 ## Requirements
 
 - Node.js 22 or newer
-- pnpm (recommended; project is pinned to `pnpm@11.18.0`)
+- pnpm
 
 ## Quick Start
 - Install dependencies
@@ -70,6 +70,9 @@ When the app starts for the first time, it asks for your Cloudflare Tunnel token
 4. Then FFmpeg starts listening for RTMP and begins processing as soon as a stream is received.
 
 <img width="510" height="220" alt="image" src="https://github.com/user-attachments/assets/609cfc94-0700-49b3-9cd1-a1b6a45fed3e" />
+
+- RTMP served at `rtmp://127.0.0.1:5740/live`
+- HTTP served at `http://127.0.0.1:8080/live`
 
 ## License
 
