@@ -15,27 +15,34 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
   await installFFmpeg({ target: isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64" });
 
   const inputURL = `rtmp://127.0.0.1:${options.port}/live`;
-  const ff = spawn(ffmpegBin, [
-    "-listen", "1",
-    "-i", inputURL,
-    ...hlsArgs()
-  ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
-  ff.stderr.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only] ${data}`);
-  });
+  const startFFmpeg = () => {
+    const ff = spawn(ffmpegBin, [
+      "-listen", "1",
+      "-i", inputURL,
+      ...hlsArgs()
+    ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
-  ff.stdout.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only stdout] ${data}`);
-  });
+    ff.stderr.on("data", (data: Buffer) => {
+      console.info(`[FFmpeg ffmpeg-only] ${data}`);
+    });
 
-  ff.on("close", (code, signal) => {
-    console.warn(`FFmpeg (ffmpeg-only) terminó con código ${code}, señal: ${signal}`);
-  });
+    ff.stdout.on("data", (data: Buffer) => {
+      console.info(`[FFmpeg ffmpeg-only stdout] ${data}`);
+    });
 
-  ff.on("error", (err) => {
-    console.error(`FFmpeg (ffmpeg-only) error: ${err.message}`);
-  });
+    ff.on("close", (code, signal) => {
+      console.warn(`FFmpeg (ffmpeg-only) terminó con código ${code}, señal: ${signal}`);
+      setTimeout(startFFmpeg, 1000);
+    });
+
+    ff.on("error", (err) => {
+      console.error(`FFmpeg (ffmpeg-only) error: ${err.message}`);
+      setTimeout(startFFmpeg, 1000);
+    });
+  };
+
+  startFFmpeg();
 
   if (options.token) {
     await install(cloudflaredBin);
