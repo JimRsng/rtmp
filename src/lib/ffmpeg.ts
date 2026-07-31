@@ -64,6 +64,11 @@ const hlsArgs = () => [
   join(Workspace.dirs.media, "%v.m3u8")
 ];
 
+const restartFFmpeg = async (options: { host: string, port: number }) => {
+  await Workspace.instance?.media.clear();
+  startFFmpeg(options);
+};
+
 export const startFFmpeg = async (options: { host: string, port: number }) => {
   const isWindows = process.platform === "win32";
 
@@ -86,11 +91,11 @@ export const startFFmpeg = async (options: { host: string, port: number }) => {
 
   ff.on("close", (code, signal) => {
     console.warn(`FFmpeg (ffmpeg-only) terminó con código ${code}, señal: ${signal}`);
-    setTimeout(() => startFFmpeg(options), 1000);
+    setTimeout(async () => await restartFFmpeg(options), 1000);
   });
 
   ff.on("error", (err) => {
     console.error(`FFmpeg (ffmpeg-only) error: ${err.message}`);
-    setTimeout(() => startFFmpeg(options), 1000);
+    setTimeout(async () => await restartFFmpeg(options), 1000);
   });
 };

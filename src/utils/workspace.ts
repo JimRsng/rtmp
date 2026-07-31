@@ -36,6 +36,15 @@ export class Workspace {
     return Workspace.instance;
   }
 
+  get media () {
+    return {
+      clear: async () => {
+        await rm(Workspace.dirs.media, { recursive: true, force: true });
+        await mkdir(Workspace.dirs.media, { recursive: true });
+      }
+    };
+  }
+
   get cache () {
     return {
       write: async (filename: string, data: string) => {
