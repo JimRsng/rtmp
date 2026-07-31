@@ -45,6 +45,10 @@ export class Workspace {
       read: async (filename: string) => {
         const filePath = join(Workspace.dirs.cache, filename);
         return readFile(filePath, "utf-8").catch(() => null);
+      },
+      delete: async (filename: string) => {
+        const filePath = join(Workspace.dirs.cache, filename);
+        return rm(filePath, { force: true });
       }
     };
   }

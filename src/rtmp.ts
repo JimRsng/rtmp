@@ -39,6 +39,14 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
   if (options.token) {
     await install(cloudflaredBin);
     spawn(cloudflaredBin, ["--version"], { stdio: "inherit" });
-    spawn(cloudflaredBin, ["tunnel", "run", "--token", options.token], { stdio: "inherit", shell: false });
+    const tunnel = spawn(cloudflaredBin, ["tunnel", "run", "--token", options.token], { stdio: ["ignore", "pipe", "pipe"], shell: false });
+
+    tunnel.stderr.on("data", (data: Buffer) => {
+      const message = data.toString();
+      if (message.includes("Tunnel token is not valid")) {
+        Workspace.instance?.cache.delete("token.txt");
+        console.error("El token no es válido. Cierra el programa y vuelve a ejecutar con un token válido.");
+      }
+    });
   }
 };
