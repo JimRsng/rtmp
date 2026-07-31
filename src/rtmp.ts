@@ -22,11 +22,11 @@ export const runRtmp = async (options: { token?: string, port: number }): Promis
   ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
   ff.stderr.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only] ${data.toString().trim()}`);
+    console.info(`[FFmpeg ffmpeg-only] ${data}`);
   });
 
   ff.stdout.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only stdout] ${data.toString().trim()}`);
+    console.info(`[FFmpeg ffmpeg-only stdout] ${data}`);
   });
 
   ff.on("close", (code, signal) => {
