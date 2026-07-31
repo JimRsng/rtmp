@@ -5,7 +5,7 @@ import { runHttp } from "./http.ts";
 import { Workspace } from "./utils/workspace.ts";
 import { isValidToken } from "./utils/token-validator.ts";
 import { pressAnyKey } from "./utils/press-any-key.ts";
-import { APP } from "./utils/app.ts";
+import { APP, checkForUpdates } from "./utils/app.ts";
 
 const main = defineCommand({
   meta: {
@@ -30,6 +30,7 @@ const main = defineCommand({
     }
   },
   async run ({ args }) {
+    await checkForUpdates();
     consola.info(`Ejecutando ${APP.name} v${APP.version}`);
     try {
       consola.start("Configurando entorno...");
