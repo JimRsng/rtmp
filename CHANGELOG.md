@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v0.1.1
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.0...v0.1.1)
+
+### 🚀 Enhancements
+
+- **app:** Check for new release on startup ([5699725](https://github.com/JimRsng/rtmp/commit/5699725))
+
+### 🩹 Fixes
+
+- Auto-restart ffmpeg on close or error ([e2c48d8](https://github.com/JimRsng/rtmp/commit/e2c48d8))
+- **dev:** Do not ask for token in dev ([d7a9c5d](https://github.com/JimRsng/rtmp/commit/d7a9c5d))
+- Restart ffmpeg and clear media dir on failure ([34911c2](https://github.com/JimRsng/rtmp/commit/34911c2))
+
+### 💅 Refactors
+
+- Extract ffmpeg & cloudflared into libs ([d10da1d](https://github.com/JimRsng/rtmp/commit/d10da1d))
+- Add interfaces for libs and services ([73ed1fc](https://github.com/JimRsng/rtmp/commit/73ed1fc))
+
+### 🏡 Chore
+
+- Add app info ([1578a83](https://github.com/JimRsng/rtmp/commit/1578a83))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.0
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.0.8...v0.1.0)
