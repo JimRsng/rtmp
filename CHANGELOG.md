@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.1...v0.1.2)
+
+### 🚀 Enhancements
+
+- **app:** Add updater prompt ([4950b52](https://github.com/JimRsng/rtmp/commit/4950b52))
+
+### 🩹 Fixes
+
+- **app:** Add exec path updater guard ([31ff1b4](https://github.com/JimRsng/rtmp/commit/31ff1b4))
+
+### 📖 Documentation
+
+- Expanded readme ([5f66873](https://github.com/JimRsng/rtmp/commit/5f66873))
+
+### 🤖 CI
+
+- Drop rename of executable ([d89ffa2](https://github.com/JimRsng/rtmp/commit/d89ffa2))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.1
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.0...v0.1.1)
