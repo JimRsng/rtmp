@@ -4,7 +4,11 @@ import { install } from "cloudflared";
 import { consola } from "consola";
 import { Workspace } from "../utils/workspace.ts";
 
-export const startCloudflared = async (options: { token: string }): Promise<void> => {
+export interface CloudflaredOptions {
+  token: string;
+}
+
+export const startCloudflared = async (options: CloudflaredOptions) => {
   const isWindows = process.platform === "win32";
 
   const cloudflaredBin = join(Workspace.path, isWindows ? "cloudflared.exe" : "cloudflared");

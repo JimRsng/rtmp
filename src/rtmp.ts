@@ -1,15 +1,11 @@
-import { startCloudflared } from "./lib/cloudflared.ts";
-import { startFFmpeg } from "./lib/ffmpeg.ts";
+import { type CloudflaredOptions, startCloudflared } from "./lib/cloudflared.ts";
+import { type FfmpegOptions, startFFmpeg } from "./lib/ffmpeg.ts";
 
-interface RtmpOptions {
-  host: string;
-  port: number;
-  cloudflared?: {
-    token: string;
-  };
+interface RtmpOptions extends FfmpegOptions {
+  cloudflared?: CloudflaredOptions;
 }
 
-export const runRtmp = async (options: RtmpOptions): Promise<void> => {
+export const runRtmp = async (options: RtmpOptions) => {
   startFFmpeg({
     host: options.host,
     port: options.port

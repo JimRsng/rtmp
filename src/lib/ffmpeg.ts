@@ -64,12 +64,17 @@ const hlsArgs = () => [
   join(Workspace.dirs.media, "%v.m3u8")
 ];
 
-const restartFFmpeg = async (options: { host: string, port: number }) => {
+export interface FfmpegOptions {
+  host: string;
+  port: number;
+}
+
+const restartFFmpeg = async (options: FfmpegOptions) => {
   await Workspace.instance?.media.clear();
   startFFmpeg(options);
 };
 
-export const startFFmpeg = async (options: { host: string, port: number }) => {
+export const startFFmpeg = async (options: FfmpegOptions) => {
   const isWindows = process.platform === "win32";
 
   await install(isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64");
