@@ -24,7 +24,7 @@ export const checkForUpdates = async () => {
   const current = `v${APP.version}`;
   const isUpdateAvailable = latest !== current;
 
-  const downloadUrl = `https://github.com/${slug}/releases/download/${latest}/${APP.name}-${latest}.exe`;
+  const downloadUrl = `https://github.com/${slug}/releases/download/${latest}/${APP.name}.exe`;
 
   if (isUpdateAvailable) {
     const updateBox = ""
@@ -45,21 +45,31 @@ export const checkForUpdates = async () => {
 
     // Define the paths for the old and new executables
     const oldExe = execPath;
-    const newExe = join(exeDir, `${APP.name}-${latest}.exe`);
+    const versionExe = join(exeDir, `${APP.name}-${latest}.exe`);
+    const newExe = join(exeDir, `${APP.name}.exe`);
 
     // Download the new executable
     consola.info(`Descargando nueva versión: ${colors.green(latest)}...`);
     const exeBinary = await $fetch(downloadUrl, { responseType: "stream" });
-    await writeFile(newExe, exeBinary);
+    await writeFile(versionExe, exeBinary);
 
     // Create a batch file to handle the update process
     const bat = `@echo off
 set "OLD_EXE=${oldExe}"
+set "VERSION_EXE=${versionExe}"
 set "NEW_EXE=${newExe}"
 
 taskkill /f /im "%OLD_EXE%" >nul 2>&1
 
+:delete
 del /f /q "%OLD_EXE%"
+
+if exist "%OLD_EXE%" (
+  timeout /t 1 /nobreak >nul
+  goto delete
+)
+
+move /Y "%VERSION_EXE%" "%NEW_EXE%"
 
 start "" "%NEW_EXE%"
 

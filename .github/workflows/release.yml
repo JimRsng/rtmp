@@ -30,9 +30,6 @@ jobs:
       - name: ⚡ Build and compile
         run: node --run compile
 
-      - name: 🏷️ Rename release asset
-        run: mv pkg/jim-rtmp.exe pkg/jim-rtmp-${{ github.ref_name }}.exe
-
       - name: 📝 Create release notes
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
