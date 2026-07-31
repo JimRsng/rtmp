@@ -1,16 +1,16 @@
 import { defineCommand, runMain } from "citty";
 import { consola } from "consola";
-import pkg from "../package.json" with { type: "json" };
 import { runRtmp } from "./rtmp.ts";
 import { runHttp } from "./http.ts";
 import { Workspace } from "./utils/workspace.ts";
 import { isValidToken } from "./utils/token-validator.ts";
 import { pressAnyKey } from "./utils/press-any-key.ts";
+import { APP } from "./utils/app.ts";
 
 const main = defineCommand({
   meta: {
-    name: pkg.name,
-    version: pkg.version
+    name: APP.name,
+    version: APP.version
   },
   args: {
     token: {
@@ -30,10 +30,10 @@ const main = defineCommand({
     }
   },
   async run ({ args }) {
-    consola.info(`Ejecutando jim-${pkg.name} v${pkg.version}`);
+    consola.info(`Ejecutando ${APP.name} v${APP.version}`);
     try {
       consola.start("Configurando entorno...");
-      const workspace = await Workspace.setup("jim-rtmp");
+      const workspace = await Workspace.setup(APP.name);
 
       const cachedToken = await workspace.cache.read("token.txt");
       const token = args.token || cachedToken || await consola.prompt("Ingresar Tunnel Token: ", { type: "text" });
