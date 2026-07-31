@@ -87,20 +87,18 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
   ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
   ff.stderr.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only] ${data}`);
+    if (data.includes("frame=")) {
+      console.info(`[FFmpeg] ${data}`);
+    }
   });
 
-  ff.stdout.on("data", (data: Buffer) => {
-    console.info(`[FFmpeg ffmpeg-only stdout] ${data}`);
-  });
-
-  ff.on("close", (code, signal) => {
-    console.warn(`FFmpeg (ffmpeg-only) terminó con código ${code}, señal: ${signal}`);
+  ff.on("close", (code) => {
+    console.warn(`[FFmpeg] terminó con código ${code}`);
     setTimeout(async () => await restartFFmpeg(options), 1000);
   });
 
   ff.on("error", (err) => {
-    console.error(`FFmpeg (ffmpeg-only) error: ${err.message}`);
+    console.error(`[FFmpeg] error: ${err.message}`);
     setTimeout(async () => await restartFFmpeg(options), 1000);
   });
 };
