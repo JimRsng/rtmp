@@ -35,6 +35,12 @@ export const checkForUpdates = async () => {
 
   const updateApp = async () => {
     const execPath = process.execPath;
+
+    if (!execPath.includes(APP.name)) {
+      consola.error("Ha ocurrido un error al intentar actualizar la aplicación. Continuando con la versión actual.");
+      return;
+    }
+
     const exeDir = dirname(execPath);
 
     // Define the paths for the old and new executables
