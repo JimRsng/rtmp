@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.5
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.4...v0.1.5)
+
+### 🚀 Enhancements
+
+- Add cache headers and session-based hls filenames ([022545e](https://github.com/JimRsng/rtmp/commit/022545e))
+- **ffmpeg:** Remove 1080p, keep only 720p ([2bb689a](https://github.com/JimRsng/rtmp/commit/2bb689a))
+
+### 🩹 Fixes
+
+- Increase HLS segment duration to 5s ([b19e51b](https://github.com/JimRsng/rtmp/commit/b19e51b))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.4
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.3...v0.1.4)
