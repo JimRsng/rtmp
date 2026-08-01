@@ -21,9 +21,7 @@ const install = async (target: string) => {
   await unlink(gzFile);
 };
 
-const sessionId = randomUUID();
-
-const hlsArgs = () => [
+const hlsArgs = (sessionId: string) => [
   "-filter_complex",
   "[0:v]split=1[v720];" +
   "[v720]scale=1280:720:force_original_aspect_ratio=decrease:force_divisible_by=2," +
@@ -80,10 +78,12 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
   await install(isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64");
   const ffmpegBin = join(Workspace.path, isWindows ? "ffmpeg.exe" : "ffmpeg");
 
+  const sessionId = randomUUID();
+
   const ff = spawn(ffmpegBin, [
     "-listen", "1",
     "-i", `rtmp://${options.host}:${options.port}/live`,
-    ...hlsArgs()
+    ...hlsArgs(sessionId)
   ], { stdio: ["ignore", "pipe", "pipe"], shell: false });
 
   ff.stderr.on("data", (data: Buffer) => {
