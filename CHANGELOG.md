@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.6
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.5...v0.1.6)
+
+### 🩹 Fixes
+
+- Generate ffmpeg session id per start call ([cf79ddd](https://github.com/JimRsng/rtmp/commit/cf79ddd))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.5
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.4...v0.1.5)
