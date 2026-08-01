@@ -25,7 +25,8 @@ router.get("/live/:file", async (req) => {
   }
   return new Response(buf, {
     headers: {
-      "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T"
+      "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T",
+      "Cache-Control": file.endsWith(".m3u8") ? "no-cache" : "public, max-age=86400"
     }
   });
 });

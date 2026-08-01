@@ -6,6 +6,7 @@ import { unlink } from "node:fs/promises";
 import { createGunzip } from "node:zlib";
 import { $fetch } from "ofetch";
 import { Workspace } from "../utils/workspace.ts";
+import { randomUUID } from "node:crypto";
 
 const install = async (target: string) => {
   const url = `https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/${target}.gz`;
@@ -19,6 +20,8 @@ const install = async (target: string) => {
   );
   await unlink(gzFile);
 };
+
+const sessionId = randomUUID();
 
 const hlsArgs = () => [
   "-filter_complex",
@@ -54,14 +57,14 @@ const hlsArgs = () => [
   "-hls_flags", "delete_segments+append_list+independent_segments",
 
   "-hls_segment_filename",
-  join(Workspace.dirs.media, "%v_%01d.ts"),
+  join(Workspace.dirs.media, `${sessionId}_%v_%01d.ts`),
 
   "-master_pl_name", "master.m3u8",
 
   "-var_stream_map",
   "v:0,a:0,name:1080p v:1,a:1,name:720p",
 
-  join(Workspace.dirs.media, "%v.m3u8")
+  join(Workspace.dirs.media, `${sessionId}_%v.m3u8`)
 ];
 
 export interface FfmpegOptions {
