@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.7
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.6...v0.1.7)
+
+### 💅 Refactors
+
+- Don't await rtmp server startup ([b78188f](https://github.com/JimRsng/rtmp/commit/b78188f))
+
+### 🏡 Chore
+
+- Log http and rtmp server ready ([822cebc](https://github.com/JimRsng/rtmp/commit/822cebc))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.6
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.5...v0.1.6)
