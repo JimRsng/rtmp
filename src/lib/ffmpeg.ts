@@ -101,4 +101,6 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
     console.error(`[FFmpeg] error: ${err.message}`);
     setTimeout(async () => await restartFFmpeg(options), 1000);
   });
+
+  return ff;
 };

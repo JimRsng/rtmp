@@ -1,3 +1,4 @@
+import consola from "consola";
 import { type CloudflaredOptions, startCloudflared } from "./lib/cloudflared.ts";
 import { type FfmpegOptions, startFFmpeg } from "./lib/ffmpeg.ts";
 
@@ -6,9 +7,13 @@ interface RtmpOptions extends FfmpegOptions {
 }
 
 export const runRtmp = async (options: RtmpOptions) => {
-  startFFmpeg({
+  const ff = await startFFmpeg({
     host: options.host,
     port: options.port
+  });
+
+  ff.once("spawn", () => {
+    consola.ready(`RTMP server listo en puerto ${options.port}`);
   });
 
   if (options.cloudflared) {

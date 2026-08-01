@@ -5,6 +5,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { Workspace } from "./utils/workspace.ts";
 import { ErrorCode } from "./utils/errors.ts";
+import consola from "consola";
 
 const { preflight, corsify } = cors({ origin: "*" });
 
@@ -35,4 +36,5 @@ export const runHttp = (options: { port: number }) => {
   const ittyServer = createServerAdapter(router.fetch);
   const httpServer = createServer(ittyServer);
   httpServer.listen(options.port);
+  consola.ready(`HTTP server listo en puerto ${options.port}`);
 };
