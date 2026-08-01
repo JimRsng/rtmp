@@ -25,11 +25,10 @@ const sessionId = randomUUID();
 
 const hlsArgs = () => [
   "-filter_complex",
-  "[0:v]split=2[v1080][v720];" +
+  "[0:v]split=1[v720];" +
   "[v720]scale=1280:720:force_original_aspect_ratio=decrease:force_divisible_by=2," +
   "pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p[v720out]",
 
-  "-map", "[v1080]", "-map", "0:a:0",
   "-map", "[v720out]", "-map", "0:a:0",
 
   "-c:v", "libx264",
@@ -43,9 +42,7 @@ const hlsArgs = () => [
   "-bf", "0",
   "-flags", "+cgop",
 
-  "-b:v:0", "4500k", "-maxrate:v:0", "4500k", "-bufsize:v:0", "9000k",
-
-  "-b:v:1", "2500k", "-maxrate:v:1", "2500k", "-bufsize:v:1", "5000k",
+  "-b:v:0", "2500k", "-maxrate:v:0", "2500k", "-bufsize:v:0", "5000k",
 
   "-c:a", "aac",
   "-b:a:0", "192k",
@@ -62,7 +59,7 @@ const hlsArgs = () => [
   "-master_pl_name", "master.m3u8",
 
   "-var_stream_map",
-  "v:0,a:0,name:1080p v:1,a:1,name:720p",
+  "v:0,a:0,name:720p",
 
   join(Workspace.dirs.media, `${sessionId}_%v.m3u8`)
 ];
