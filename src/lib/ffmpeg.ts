@@ -49,7 +49,7 @@ const hlsArgs = () => [
   "-b:a:1", "128k",
 
   "-f", "hls",
-  "-hls_time", "3",
+  "-hls_time", "5",
   "-hls_list_size", "500",
   "-hls_flags", "delete_segments+append_list+independent_segments",
 
