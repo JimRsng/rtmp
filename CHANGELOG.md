@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.1.8
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.7...v0.1.8)
+
+### 🩹 Fixes
+
+- Ensure an empty or missing token is treated as invalid ([869a42c](https://github.com/JimRsng/rtmp/commit/869a42c))
+
+### 📦 Build
+
+- Minify build output ([c077906](https://github.com/JimRsng/rtmp/commit/c077906))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.1.7
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.6...v0.1.7)
