@@ -54,7 +54,7 @@ const main = defineCommand({
         args.token || cachedToken || await consola.prompt("Ingresar Tunnel Token: ", { type: "text" })
       );
 
-      if (!token || !isValidToken(token)) {
+      if (!args.dev && (!token || !isValidToken(token))) {
         workspace.cache.delete("token.txt");
         consola.error("El token no es válido. Cierra el programa y vuelve a ejecutar con un token válido.");
         consola.info("Presione cualquier tecla para salir...");
