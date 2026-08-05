@@ -59,7 +59,7 @@ const hlsArgs = (sessionId: string) => [
   "-hls_segment_filename",
   join(Workspace.dirs.media, `${sessionId}_%v_%01d.ts`),
 
-  "-master_pl_name", "master.m3u8",
+  "-master_pl_name", `${sessionId}_master.m3u8`,
 
   "-var_stream_map",
   "v:0,a:0,name:720p",
