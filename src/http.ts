@@ -3,15 +3,21 @@ import { createServer } from "node:http";
 import { AutoRouter, cors, json } from "itty-router";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import consola from "consola";
 import { Workspace } from "./utils/workspace.ts";
 import { ErrorCode } from "./utils/errors.ts";
-import consola from "consola";
+import { runWebSocket, uuidMap } from "./ws.ts";
+import { liveInfo } from "./lib/ffmpeg.ts";
 
 const { preflight, corsify } = cors({ origin: "*" });
 
 const router = AutoRouter({
   before: [preflight],
   finally: [corsify]
+});
+
+router.get("/live", () => {
+  return json({ ...liveInfo, viewerCount: uuidMap.size });
 });
 
 router.get("/live/:file", async (req) => {
@@ -35,6 +41,7 @@ router.get("/live/:file", async (req) => {
 export const runHttp = (options: { port: number }) => {
   const ittyServer = createServerAdapter(router.fetch);
   const httpServer = createServer(ittyServer);
+  runWebSocket({ server: httpServer });
   httpServer.listen(options.port);
-  consola.ready(`HTTP server listo en puerto ${options.port}`);
+  consola.ready(`HTTP + WS server listo en puerto ${options.port}`);
 };
