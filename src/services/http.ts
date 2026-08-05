@@ -4,10 +4,10 @@ import { AutoRouter, cors, json } from "itty-router";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import consola from "consola";
-import { Workspace } from "./utils/workspace.ts";
-import { ErrorCode } from "./utils/errors.ts";
+import { Workspace } from "../utils/workspace.ts";
+import { ErrorCode } from "../utils/errors.ts";
 import { runWebSocket, uuidMap } from "./ws.ts";
-import { liveInfo } from "./lib/ffmpeg.ts";
+import { liveInfo } from "../lib/ffmpeg.ts";
 
 const { preflight, corsify } = cors({ origin: "*" });
 

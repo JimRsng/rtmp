@@ -1,7 +1,7 @@
 import { defineCommand, runMain } from "citty";
 import { consola } from "consola";
-import { runRtmp } from "./rtmp.ts";
-import { runHttp } from "./http.ts";
+import { runRtmp } from "./services/rtmp.ts";
+import { runHttp } from "./services/http.ts";
 import { Workspace } from "./utils/workspace.ts";
 import { isValidToken } from "./utils/token-validator.ts";
 import { pressAnyKey } from "./utils/press-any-key.ts";

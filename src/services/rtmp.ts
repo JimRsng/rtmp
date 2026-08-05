@@ -1,6 +1,6 @@
 import consola from "consola";
-import { type CloudflaredOptions, startCloudflared } from "./lib/cloudflared.ts";
-import { type FfmpegOptions, startFFmpeg } from "./lib/ffmpeg.ts";
+import { type CloudflaredOptions, startCloudflared } from "../lib/cloudflared.ts";
+import { type FfmpegOptions, startFFmpeg } from "../lib/ffmpeg.ts";
 
 interface RtmpOptions extends FfmpegOptions {
   cloudflared?: CloudflaredOptions;

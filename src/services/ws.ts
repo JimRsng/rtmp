@@ -1,6 +1,6 @@
 import { type WebSocket, WebSocketServer } from "ws";
 import type { Server } from "node:http";
-import { liveInfo } from "./lib/ffmpeg.ts";
+import { liveInfo } from "../lib/ffmpeg.ts";
 
 export const uuidMap = new Map<string, { lastSeen: number, url: WebSocket["url"] }>();
 
