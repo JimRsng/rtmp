@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.1.9
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.8...v0.1.9)
+
+### 🚀 Enhancements
+
+- Add WebSocket support for sending live streaming info ([9b13415](https://github.com/JimRsng/rtmp/commit/9b13415))
+- Prefix master playlist with session ID ([e9ba83c](https://github.com/JimRsng/rtmp/commit/e9ba83c))
+
+### 🩹 Fixes
+
+- **dev:** Skip token validation in dev mode ([8cc77b7](https://github.com/JimRsng/rtmp/commit/8cc77b7))
+
+### 💅 Refactors
+
+- Move rtmp, https, ws modules into `services/` ([1858f89](https://github.com/JimRsng/rtmp/commit/1858f89))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.1.8
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.7...v0.1.8)
