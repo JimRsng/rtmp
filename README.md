@@ -9,6 +9,7 @@ It also supports a development mode without Cloudflare Tunnel and token caching 
 
 - RTMP ingest with FFmpeg processing
 - HLS output served via HTTP
+- WebSocket server to serve live data (viewer count, status) for web clients
 - Auto-installs `cloudflared.exe` and `ffmpeg.exe` into `%LOCALAPPDATA%`
 - `--dev` mode (no tunnel)
 - Cloudflare token validation and cache
@@ -20,12 +21,15 @@ It also supports a development mode without Cloudflare Tunnel and token caching 
 - pnpm
 
 ## Quick Start
+
 - Install dependencies
+
    ```bash
    pnpm install
    ```
 
 - Run app
+
    ```bash
    # Dev mode (no tunnel)
    pnpm dev
@@ -69,7 +73,7 @@ When the app starts for the first time, it asks for your Cloudflare Tunnel token
 3. If saved, the app will use the cached token on next launches and will not ask again.
 4. Then FFmpeg starts listening for RTMP and begins processing as soon as a stream is received.
 
-<img width="510" height="220" alt="image" src="https://github.com/user-attachments/assets/609cfc94-0700-49b3-9cd1-a1b6a45fed3e" />
+![usage](https://github.com/user-attachments/assets/609cfc94-0700-49b3-9cd1-a1b6a45fed3e)
 
 - RTMP served at `rtmp://127.0.0.1:5740/live`
 - HTTP served at `http://127.0.0.1:8080/live`
