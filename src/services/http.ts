@@ -1,8 +1,9 @@
 import { createServerAdapter } from "@whatwg-node/server";
 import { createServer } from "node:http";
 import { AutoRouter, cors, json } from "itty-router";
-import { readFile } from "node:fs/promises";
+import { createReadStream } from "node:fs";
 import { join } from "node:path";
+import { Readable } from "node:stream";
 import consola from "consola";
 import { Workspace } from "../utils/workspace.ts";
 import { ErrorCode } from "../utils/errors.ts";
@@ -25,16 +26,24 @@ router.get("/live/:file", async (req) => {
   if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
     return json({ error: "Request not allowed" }, { status: ErrorCode.BAD_REQUEST });
   }
+
   const filePath = join(Workspace.dirs.media, file);
-  const buf = await readFile(filePath).catch(() => null);
-  if (!buf) {
-    return json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND });
-  }
-  return new Response(buf, {
-    headers: {
-      "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T",
-      "Cache-Control": file.endsWith(".m3u8") ? "no-cache" : "public, max-age=86400"
-    }
+  const fileStream = createReadStream(filePath);
+
+  return new Promise<Response>((resolve) => {
+    fileStream.once("open", () => {
+      resolve(new Response(Readable.toWeb(fileStream) as ReadableStream, {
+        headers: {
+          "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T",
+          "Cache-Control": file.endsWith(".m3u8") ? "no-cache" : "public, max-age=86400"
+        }
+      }));
+    });
+    fileStream.once("error", () => {
+      resolve(json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND }));
+      fileStream.destroy();
+      return;
+    });
   });
 });
 
