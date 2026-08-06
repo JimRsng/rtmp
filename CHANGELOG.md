@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.10
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.9...v0.1.10)
+
+### 🚀 Enhancements
+
+- Stream files via ReadStream instead of buffering ([dd54628](https://github.com/JimRsng/rtmp/commit/dd54628))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.9
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.8...v0.1.9)
