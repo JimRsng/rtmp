@@ -9,6 +9,7 @@ It also supports a development mode without Cloudflare Tunnel and token caching 
 
 - RTMP ingest with FFmpeg processing
 - HLS output served via HTTP
+- WebSocket server to serve live data (viewer count, status) for web clients
 - Auto-installs `cloudflared.exe` and `ffmpeg.exe` into `%LOCALAPPDATA%`
 - `--dev` mode (no tunnel)
 - Cloudflare token validation and cache
