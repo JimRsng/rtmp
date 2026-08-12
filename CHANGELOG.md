@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.1.12
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.10...v0.1.12)
+
+### 🚀 Enhancements
+
+- Stream files via ReadStream instead of buffering" ([ff9425e](https://github.com/JimRsng/rtmp/commit/ff9425e))
+
+### 📖 Documentation
+
+- **readme:** Format document ([0adfe65](https://github.com/JimRsng/rtmp/commit/0adfe65))
+- **readme:** Include websocket server in features ([9ba20fb](https://github.com/JimRsng/rtmp/commit/9ba20fb))
+
+### 🏡 Chore
+
+- Update dependencies ([be9104c](https://github.com/JimRsng/rtmp/commit/be9104c))
+- Bump missing version ([6b7f8ed](https://github.com/JimRsng/rtmp/commit/6b7f8ed))
+
+### ❤️ Contributors
+
+- Yizack Rangel ([@Yizack](https://github.com/Yizack))
+
 ## v0.1.10
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.9...v0.1.10)
