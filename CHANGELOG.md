@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.11
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.8...v0.1.11)
+
+### 🚀 Enhancements
+
+- Add WebSocket support for sending live streaming info ([c5e1220](https://github.com/JimRsng/rtmp/commit/c5e1220))
+- Add WebSocket support for sending live streaming info" ([781eb5c](https://github.com/JimRsng/rtmp/commit/781eb5c))
+
+### 🏡 Chore
+
+- **release:** V0.1.9 ([cb1c182](https://github.com/JimRsng/rtmp/commit/cb1c182))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.9
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.8...v0.1.9)
