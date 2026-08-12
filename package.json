@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "rtmp",
-  "version": "0.1.10",
+  "version": "0.1.8",
   "description": "A local RTMP project for JimRsng's streaming space.",
   "type": "module",
   "license": "MIT",
@@ -44,9 +44,8 @@
   "devDependencies": {
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^26.1.2",
-    "@types/ws": "^8.18.1",
     "@whatwg-node/server": "^0.11.0",
-    "@yao-pkg/pkg": "^6.22.0",
+    "@yao-pkg/pkg": "^6.21.0",
     "changelogen": "^0.6.2",
     "citty": "^0.2.2",
     "cloudflared": "^0.7.1",
@@ -54,10 +53,9 @@
     "itty-router": "^5.0.24",
     "obuild": "^0.4.38",
     "ofetch": "^1.5.1",
-    "oxlint": "^1.77.0",
+    "oxlint": "^1.76.0",
     "resedit-cli": "^3.1.0",
-    "typescript": "^7.0.2",
-    "ws": "^8.21.2"
+    "typescript": "^7.0.2"
   },
-  "packageManager": "pnpm@11.20.0"
+  "packageManager": "pnpm@11.18.0"
 }

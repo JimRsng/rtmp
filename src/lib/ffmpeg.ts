@@ -8,11 +8,6 @@ import { $fetch } from "ofetch";
 import { Workspace } from "../utils/workspace.ts";
 import { randomUUID } from "node:crypto";
 
-export const liveInfo = {
-  isLive: false,
-  sessionId: ""
-};
-
 const install = async (target: string) => {
   const url = `https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/${target}.gz`;
   const response = await $fetch(url, { responseType: "stream" });
@@ -59,7 +54,7 @@ const hlsArgs = (sessionId: string) => [
   "-hls_segment_filename",
   join(Workspace.dirs.media, `${sessionId}_%v_%01d.ts`),
 
-  "-master_pl_name", `${sessionId}_master.m3u8`,
+  "-master_pl_name", "master.m3u8",
 
   "-var_stream_map",
   "v:0,a:0,name:720p",
@@ -84,7 +79,6 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
   const ffmpegBin = join(Workspace.path, isWindows ? "ffmpeg.exe" : "ffmpeg");
 
   const sessionId = randomUUID();
-  liveInfo.sessionId = sessionId;
 
   const ff = spawn(ffmpegBin, [
     "-listen", "1",
@@ -94,19 +88,16 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
 
   ff.stderr.on("data", (data: Buffer) => {
     if (data.includes("frame=")) {
-      liveInfo.isLive = true;
       console.info(`[FFmpeg] ${data}`);
     }
   });
 
   ff.on("close", (code) => {
-    liveInfo.isLive = false;
     console.warn(`[FFmpeg] terminó con código ${code}`);
     setTimeout(async () => await restartFFmpeg(options), 1000);
   });
 
   ff.on("error", (err) => {
-    liveInfo.isLive = false;
     console.error(`[FFmpeg] error: ${err.message}`);
     setTimeout(async () => await restartFFmpeg(options), 1000);
   });
