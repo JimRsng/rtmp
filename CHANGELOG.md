@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.14
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.13...v0.1.14)
+
+### 🔥 Performance
+
+- **ffmpeg:** Reduce HLS segment duration ([2e9c397](https://github.com/JimRsng/rtmp/commit/2e9c397))
+
+### ❤️ Contributors
+
+- Ahmed Rangel <ahmedrangel@outlook.com>
+
 ## v0.1.13
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.12...v0.1.13)
