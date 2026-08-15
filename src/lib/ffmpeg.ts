@@ -39,8 +39,8 @@ const hlsArgs = (sessionId: string) => [
   "-tune", "zerolatency",
   "-pix_fmt", "yuv420p",
 
-  "-g", "60",
-  "-keyint_min", "60",
+  "-g", "90",
+  "-keyint_min", "90",
   "-sc_threshold", "0",
   "-bf", "0",
   "-flags", "+cgop",
