@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.15
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.14...v0.1.15)
+
+### 🔥 Performance
+
+- **hls:** Serve media from session directories ([12c0462](https://github.com/JimRsng/rtmp/commit/12c0462))
+
+### 🩹 Fixes
+
+- **ffmpeg:** Align hls gop interval for 3s segments ([676e36a](https://github.com/JimRsng/rtmp/commit/676e36a))
+- **updater:** Refresh bundled binaries on update ([3e86845](https://github.com/JimRsng/rtmp/commit/3e86845))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.14
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.13...v0.1.14)
