@@ -13,7 +13,7 @@ export const liveInfo = {
   sessionId: ""
 };
 
-const install = async (target: string) => {
+export const install = async (target: string) => {
   const url = `https://github.com/eugeneware/ffmpeg-static/releases/download/b6.1.1/${target}.gz`;
   const response = await $fetch(url, { responseType: "stream" });
   const gzFile = `${Workspace.path}/ffmpeg.gz`;
@@ -79,9 +79,11 @@ const restartFFmpeg = async (options: FfmpegOptions) => {
 
 export const startFFmpeg = async (options: FfmpegOptions) => {
   const isWindows = process.platform === "win32";
-
-  await install(isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64");
   const ffmpegBin = join(Workspace.path, isWindows ? "ffmpeg.exe" : "ffmpeg");
+
+  if (!existsSync(ffmpegBin)) {
+    await install(isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64");
+  }
 
   const sessionId = randomUUID();
   liveInfo.sessionId = sessionId;

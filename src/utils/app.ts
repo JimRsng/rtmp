@@ -6,6 +6,8 @@ import { consola } from "consola";
 import { colors } from "consola/utils";
 import { Workspace } from "./workspace.ts";
 import pkg from "../../package.json" with { type: "json" };
+import { install as installCloudflared } from "cloudflared";
+import { install as installFfmpeg } from "../lib/ffmpeg.ts";
 
 export const APP = {
   name: `jim-${pkg.name}`,
@@ -40,6 +42,12 @@ export const checkForUpdates = async () => {
       consola.error("Ha ocurrido un error al intentar actualizar la aplicación. Continuando con la versión actual.");
       return;
     }
+
+    // Update cloudflared and ffmpeg
+    const isWindows = process.platform === "win32";
+    const cloudflaredBin = join(Workspace.path, isWindows ? "cloudflared.exe" : "cloudflared");
+    await installCloudflared(cloudflaredBin);
+    await installFfmpeg(isWindows ? "ffmpeg-win32-x64" : "ffmpeg-linux-x64");
 
     const exeDir = dirname(execPath);
 
