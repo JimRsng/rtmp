@@ -21,13 +21,13 @@ router.get("/live", () => {
   return json({ ...liveInfo, viewerCount: uuidMap.size });
 });
 
-router.get("/live/:file", async (req) => {
-  const { file } = req.params as { file: string };
-  if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
+router.get("/live/:sessionId/:file", async (req) => {
+  const { sessionId, file } = req.params as { sessionId: string, file: string };
+  if (!/^[\w-]+$/.test(sessionId) || !/^[\w-]+\.(ts|m3u8)$/.test(file)) {
     return json({ error: "Request not allowed" }, { status: ErrorCode.BAD_REQUEST });
   }
 
-  const filePath = join(Workspace.dirs.media, file);
+  const filePath = join(Workspace.dirs.media, sessionId, file);
   const fileStream = createReadStream(filePath);
 
   return new Promise<Response>((resolve) => {
