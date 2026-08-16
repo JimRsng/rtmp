@@ -5,7 +5,7 @@ allowBuilds:
   cloudflared: false
   esbuild: false
   ffmpeg-static: false
-  node-datachannel: true
+  node-datachannel: false
   unrs-resolver: false
   utf-8-validate: false
 
