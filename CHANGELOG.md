@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.16
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.15...v0.1.16)
+
+### 🩹 Fixes
+
+- **http:** Serve HLS variants by quality path ([f77cb05](https://github.com/JimRsng/rtmp/commit/f77cb05))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.15
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.14...v0.1.15)
