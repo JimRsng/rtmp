@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.1.18
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.17...v0.1.18)
+
+### 🚀 Enhancements
+
+- **ws:** Added p2p tracker socket + split info socket ([5f45c2b](https://github.com/JimRsng/rtmp/commit/5f45c2b))
+
+### 🩹 Fixes
+
+- **torrent-tracker:** Switch tracker server to bittorrent-tracker/server, add @z-torrent/tracker Server types to it ([f2531ef](https://github.com/JimRsng/rtmp/commit/f2531ef))
+- **ws:** Reject unknown websocket paths ([42c8a2b](https://github.com/JimRsng/rtmp/commit/42c8a2b))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.17
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.16...v0.1.17)
