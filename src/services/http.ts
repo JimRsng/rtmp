@@ -17,33 +17,43 @@ const router = AutoRouter({
   finally: [corsify]
 });
 
-router.get("/live", () => {
-  return json({ ...liveInfo, viewerCount: uuidMap.size });
-});
-
-router.get("/live/:sessionId/:file", async (req) => {
-  const { sessionId, file } = req.params as { sessionId: string, file: string };
-  if (!/^[\w-]+$/.test(sessionId) || !/^[\w-]+\.(ts|m3u8)$/.test(file)) {
-    return json({ error: "Request not allowed" }, { status: ErrorCode.BAD_REQUEST });
-  }
-
-  const filePath = join(Workspace.dirs.media, sessionId, file);
+const stream = (filePath: string, headers: Record<string, string>) => {
   const fileStream = createReadStream(filePath);
-
   return new Promise<Response>((resolve) => {
     fileStream.once("open", () => {
-      resolve(new Response(Readable.toWeb(fileStream) as ReadableStream, {
-        headers: {
-          "Content-Type": file.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/MP2T",
-          "Cache-Control": file.endsWith(".m3u8") ? "no-cache" : "public, max-age=86400"
-        }
-      }));
+      resolve(new Response(Readable.toWeb(fileStream) as ReadableStream, { headers }));
     });
+
     fileStream.once("error", () => {
       resolve(json({ error: "File not found" }, { status: ErrorCode.NOT_FOUND }));
       fileStream.destroy();
-      return;
     });
+  });
+};
+
+router.get("/live", () => json({ ...liveInfo, viewerCount: uuidMap.size }));
+
+router.get("/live/:sessionId/master.m3u8", (req) => {
+  const { sessionId } = req.params as { sessionId: string };
+  const filePath = join(Workspace.dirs.media, sessionId, "master.m3u8");
+  return stream(filePath, {
+    "Content-Type": "application/vnd.apple.mpegurl",
+    "Cache-Control": "no-cache"
+  });
+});
+
+router.get("/live/:sessionId/:quality/:file", async (req) => {
+  const { sessionId, quality, file } = req.params as { sessionId: string, quality: string, file: string };
+  if (!/^[\w-]+\.(ts|m3u8)$/.test(file)) {
+    return json({ error: "Request not allowed" }, { status: ErrorCode.BAD_REQUEST });
+  }
+
+  const filePath = join(Workspace.dirs.media, sessionId, quality, file);
+  const isPlaylist = file.endsWith(".m3u8");
+
+  return stream(filePath, {
+    "Content-Type": isPlaylist ? "application/vnd.apple.mpegurl" : "video/mp2t",
+    "Cache-Control": isPlaylist ? "no-cache" : "public, max-age=86400"
   });
 });
 

@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { join } from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createReadStream, createWriteStream, existsSync } from "node:fs";
-import { mkdir, unlink } from "node:fs/promises";
+import { unlink } from "node:fs/promises";
 import { createGunzip } from "node:zlib";
 import { $fetch } from "ofetch";
 import { Workspace } from "../utils/workspace.ts";
@@ -57,14 +57,14 @@ const hlsArgs = (sessionId: string) => [
   "-hls_flags", "delete_segments+append_list+independent_segments",
 
   "-hls_segment_filename",
-  join(Workspace.dirs.media, sessionId, "%v_%01d.ts"),
+  join(Workspace.dirs.media, `${sessionId}/%v/%01d.ts`),
 
   "-master_pl_name", "master.m3u8",
 
   "-var_stream_map",
   "v:0,a:0,name:720p",
 
-  join(Workspace.dirs.media, sessionId, "%v.m3u8")
+  join(Workspace.dirs.media, `${sessionId}/%v/playlist.m3u8`)
 ];
 
 export interface FfmpegOptions {
@@ -87,8 +87,6 @@ export const startFFmpeg = async (options: FfmpegOptions) => {
 
   const sessionId = randomUUID();
   liveInfo.sessionId = sessionId;
-
-  await mkdir(join(Workspace.dirs.media, sessionId), { recursive: true });
 
   const ff = spawn(ffmpegBin, [
     "-listen", "1",
