@@ -55,6 +55,7 @@
     "obuild": "^0.4.38",
     "ofetch": "^1.5.1",
     "oxlint": "^1.77.0",
+    "pathe": "^2.0.3",
     "resedit-cli": "^3.1.0",
     "typescript": "^7.0.2",
     "ws": "^8.21.2"

@@ -50,6 +50,9 @@ importers:
       oxlint:
         specifier: ^1.77.0
         version: 1.77.0
+      pathe:
+        specifier: ^2.0.3
+        version: 2.0.3
       resedit-cli:
         specifier: ^3.1.0
         version: 3.1.0(typescript@7.0.2)

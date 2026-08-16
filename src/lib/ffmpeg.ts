@@ -7,6 +7,7 @@ import { createGunzip } from "node:zlib";
 import { $fetch } from "ofetch";
 import { Workspace } from "../utils/workspace.ts";
 import { randomUUID } from "node:crypto";
+import { normalize } from "pathe";
 
 export const liveInfo = {
   isLive: false,
@@ -57,14 +58,14 @@ const hlsArgs = (sessionId: string) => [
   "-hls_flags", "delete_segments+append_list+independent_segments",
 
   "-hls_segment_filename",
-  join(Workspace.dirs.media, `${sessionId}/%v/%01d.ts`),
+  normalize(join(Workspace.dirs.media, sessionId, "%v", "%01d.ts")),
 
   "-master_pl_name", "master.m3u8",
 
   "-var_stream_map",
   "v:0,a:0,name:720p",
 
-  join(Workspace.dirs.media, `${sessionId}/%v/playlist.m3u8`)
+  normalize(join(Workspace.dirs.media, sessionId, "%v", "playlist.m3u8"))
 ];
 
 export interface FfmpegOptions {
