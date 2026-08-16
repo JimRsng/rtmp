@@ -1,5 +1,5 @@
 import type { Server } from "node:http";
-import { Server as TrackerServer } from "@z-torrent/tracker";
+import TrackerServer from "bittorrent-tracker/server";
 import { parseURL } from "ufo";
 import { Server as InfoServer } from "../utils/info-socket.ts";
 
