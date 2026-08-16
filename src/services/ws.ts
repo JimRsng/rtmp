@@ -15,10 +15,15 @@ export const runWebSocket = ({ server }: { server: Server }) => {
           trackerSocket.ws?.emit("connection", client, request);
         });
         return;
-      default:
+      case "/":
+      case "":
         infoSocket.ws?.handleUpgrade(request, socket, head, (client) => {
           infoSocket.ws?.emit("connection", client, request);
         });
+        return;
+      default:
+        socket.destroy();
+        return;
     }
   });
 };
