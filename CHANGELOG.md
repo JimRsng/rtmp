@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.19
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.18...v0.1.19)
+
+### 🏡 Chore
+
+- **pnpm:** Disable node-datachannel builds ([794e3af](https://github.com/JimRsng/rtmp/commit/794e3af))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.18
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.17...v0.1.18)
