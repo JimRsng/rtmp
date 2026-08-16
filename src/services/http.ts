@@ -7,7 +7,7 @@ import { Readable } from "node:stream";
 import consola from "consola";
 import { Workspace } from "../utils/workspace.ts";
 import { ErrorCode } from "../utils/errors.ts";
-import { runWebSocket, uuidMap } from "./ws.ts";
+import { infoSocket, runWebSocket } from "./ws.ts";
 import { liveInfo } from "../lib/ffmpeg.ts";
 
 const { preflight, corsify } = cors({ origin: "*" });
@@ -31,7 +31,7 @@ const stream = (filePath: string, headers: Record<string, string>) => {
   });
 };
 
-router.get("/live", () => json({ ...liveInfo, viewerCount: uuidMap.size }));
+router.get("/live", () => json({ ...liveInfo, viewerCount: infoSocket.viewerCount }));
 
 router.get("/live/:sessionId/master.m3u8", (req) => {
   const { sessionId } = req.params as { sessionId: string };
