@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.1.17
+
+[compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.16...v0.1.17)
+
+### 🩹 Fixes
+
+- **ffmpeg:** Normalize HLS segment paths ([a1e1546](https://github.com/JimRsng/rtmp/commit/a1e1546))
+
+### ❤️ Contributors
+
+- Ahmed Rangel ([@ahmedrangel](https://github.com/ahmedrangel))
+
 ## v0.1.16
 
 [compare changes](https://github.com/JimRsng/rtmp/compare/v0.1.15...v0.1.16)
